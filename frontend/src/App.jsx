@@ -1,11 +1,8 @@
-function App() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-600">
-      <h1 className="text-5xl font-bold text-white">
-        EduVerse
-      </h1>
-    </div>
-  )
+import React from 'react'
+import Home from './pages/Home'
+
+const App = () => {
+  return <Home />
 }
 
 export default App
