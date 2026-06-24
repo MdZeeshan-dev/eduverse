@@ -1,9 +1,10 @@
+import hero from "../assets/hero.png";
+
 const Home = () => {
   return (
     <main className="min-h-screen bg-white pt-20">
       <section className="mx-auto flex min-h-screen max-w-7xl items-center px-6">
         <div className="grid w-full items-center gap-12 md:grid-cols-2">
-          
           {/* Left Content */}
           <div>
             <span className="inline-block rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-600">
@@ -17,8 +18,8 @@ const Home = () => {
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
               Learn from industry experts, build real-world projects, crack
-              interviews, and become job-ready with premium courses designed
-              for your success.
+              interviews, and become job-ready with premium courses designed for
+              your success.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
@@ -51,13 +52,12 @@ const Home = () => {
 
           {/* Right Content */}
           <div className="flex justify-center">
-            <div className="flex h-[500px] w-[500px] items-center justify-center rounded-3xl bg-blue-100 shadow-xl">
-              <h2 className="text-3xl font-bold text-blue-600">
-                Hero Image
-              </h2>
-            </div>
+            <img
+              src={hero}
+              alt="EduVerse Hero"
+              className="w-full max-w-[650px]"
+            />
           </div>
-
         </div>
       </section>
     </main>
