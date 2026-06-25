@@ -4,12 +4,8 @@ const Navbar = () => {
   return (
     <nav className="border-b border-gray-100 bg-white">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-        
         {/* Logo */}
-        <NavLink
-          to="/"
-          className="text-3xl font-bold text-blue-600"
-        >
+        <NavLink to="/" className="text-3xl font-bold text-blue-600">
           EduVerse
         </NavLink>
 
@@ -68,7 +64,6 @@ const Navbar = () => {
             Sign Up
           </NavLink>
         </div>
-
       </div>
     </nav>
   );
