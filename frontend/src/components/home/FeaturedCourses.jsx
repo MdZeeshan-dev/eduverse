@@ -1,8 +1,14 @@
 import CourseCard from "./CourseCard";
 
+import react from "../../assets/courses/react.jpg";
+import web from "../../assets/courses/web.jpg";
+import uiux from "../../assets/courses/uiux.jpg";
+import dsa from "../../assets/courses/dsa.jpg";
+
 const courses = [
   {
     id: 1,
+    image: react,
     title: "React Mastery",
     instructor: "John Doe",
     rating: 4.8,
@@ -10,6 +16,7 @@ const courses = [
   },
   {
     id: 2,
+    image: web,
     title: "Full Stack Web Development",
     instructor: "Jane Smith",
     rating: 4.9,
@@ -17,13 +24,15 @@ const courses = [
   },
   {
     id: 3,
-    title: "UI UX Design",
+    image: uiux,
+    title: "UI / UX Design",
     instructor: "Alex Parker",
     rating: 4.7,
     price: 399,
   },
   {
     id: 4,
+    image: dsa,
     title: "Data Structures & Algorithms",
     instructor: "Mark Wilson",
     rating: 4.8,
@@ -39,7 +48,7 @@ const FeaturedCourses = () => {
           Featured Courses
         </h2>
 
-        <button className="font-medium text-blue-600">
+        <button className="font-medium text-blue-600 hover:text-blue-700">
           View All
         </button>
       </div>
@@ -48,6 +57,7 @@ const FeaturedCourses = () => {
         {courses.map((course) => (
           <CourseCard
             key={course.id}
+            image={course.image}
             title={course.title}
             instructor={course.instructor}
             rating={course.rating}
