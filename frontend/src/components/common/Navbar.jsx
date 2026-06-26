@@ -5,8 +5,6 @@ import { useState } from "react";
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "Courses", path: "/courses" },
-  { name: "About", path: "/about" },
-  { name: "Blog", path: "/blog" },
 ];
 
 const Navbar = () => {
@@ -40,11 +38,10 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <li key={link.path}>
               <NavLink
+                end={link.path === "/"}
                 to={link.path}
                 className={({ isActive }) =>
-                  `relative pb-1 text-sm font-semibold transition-all duration-300
-                  
-                  ${
+                  `relative pb-1 text-sm font-semibold transition-all duration-300 ${
                     isActive
                       ? "text-blue-600 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-blue-600"
                       : "text-gray-700 hover:text-blue-600 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full"
@@ -94,12 +91,11 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
+                end={link.path === "/"}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
-                  `rounded-lg px-4 py-3 text-sm font-medium transition
-                  
-                  ${
+                  `rounded-lg px-4 py-3 text-sm font-medium transition ${
                     isActive
                       ? "bg-blue-50 text-blue-600"
                       : "text-gray-700 hover:bg-gray-100"
