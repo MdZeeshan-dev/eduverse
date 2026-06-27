@@ -1,222 +1,211 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Eye, EyeOff } from 'lucide-react';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [role, setRole] = useState('student');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("student");
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-
-  const validateEmail = (value) => {
-    if (!value) {
-      setEmailError('Email address is required');
-      return false;
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(value)) {
-      setEmailError('Please enter a valid email address');
-      return false;
-    }
-    setEmailError('');
-    return true;
-  };
-
-  const validatePassword = (value) => {
-    if (!value) {
-      setPasswordError('Password is required');
-      return false;
-    }
-    if (value.length < 8) {
-      setPasswordError('Password must be at least 8 characters long');
-      return false;
-    }
-    setPasswordError('');
-    return true;
-  };
-
-  const handleEmailChange = (e) => {
-    const value = e.target.value;
-    setEmail(value);
-    validateEmail(value);
-  };
-
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
-    setPassword(value);
-    validatePassword(value);
-  };
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    
-    const isEmailValid = validateEmail(email);
-    const isPasswordValid = validatePassword(password);
 
-    if (!isEmailValid || !isPasswordValid) return;
+    setLoading(true);
 
-    setIsLoading(true);
-    
-    const userData = { email, password, role };
-    console.log('Form Submitted with Role:', userData);
+    console.log({
+      email,
+      password,
+      role,
+    });
+
+    setTimeout(() => {
+      setLoading(false);
+      // later
+      // navigate("/dashboard")
+    }, 1000);
   };
 
-  const isFormInvalid = 
-    !email || 
-    !password || 
-    !!emailError || 
-    !!passwordError || 
-    isLoading;
-
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-slate-200 p-4 font-sans">
-      <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row border-2 border-slate-300">
-        
-        {/* Left Side Banner */}
-        <div className="hidden md:flex md:w-5/12 bg-indigo-700 flex-col justify-between p-8 text-white">
-          <div className="space-y-4">
-            <span className="text-[11px] font-bold tracking-widest uppercase bg-indigo-800 px-3 py-1 rounded-md">
-              EduVerse Platform
+    <div className="min-h-screen bg-slate-100 flex items-center justify-center p-5">
+      <div className="w-full max-w-5xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+
+        {/* Left */}
+        <div className="hidden md:flex md:w-5/12 bg-indigo-700 text-white p-10 flex-col justify-between">
+
+          <div>
+            <span className="bg-indigo-800 px-3 py-1 rounded-md text-xs font-semibold">
+              EduVerse
             </span>
-            <h1 className="text-4xl font-black tracking-tight mt-2">EduVerse</h1>
-            <p className="text-sm text-indigo-100 leading-relaxed font-medium">
-              India's premium tech-learning ecosystem. Access premium courses, live bootcamps, and industrial mentorship.
+
+            <h1 className="text-5xl font-bold mt-5">
+              Welcome Back
+            </h1>
+
+            <p className="mt-4 text-indigo-100 leading-7">
+              Continue your learning journey with India's modern
+              online learning platform.
             </p>
           </div>
 
-          <div className="pt-6 border-t border-indigo-600">
-            <p className="text-xs text-indigo-200">Empowering future developers</p>
-            <p className="text-lg font-bold text-white mt-0.5">100,000+ Learners</p>
+          {/* Image yaha baad me add karna */}
+
+          <div>
+            <p className="text-indigo-200 text-sm">
+              Trusted by
+            </p>
+
+            <h2 className="text-3xl font-bold">
+              100,000+ Learners
+            </h2>
           </div>
         </div>
 
-        {/* Right Side Login Form */}
-        <div className="w-full md:w-7/12 p-8 sm:p-10 flex flex-col justify-center bg-white">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-slate-900">Welcome Back</h2>
-            <p className="text-xs text-slate-500 mt-1">Please enter your credentials to log in.</p>
-          </div>
+        {/* Right */}
+        <div className="w-full md:w-7/12 p-8 md:p-12">
 
-          <form onSubmit={handleLogin} className="space-y-4">
-            {/* Role Selection Container */}
+          <h2 className="text-3xl font-bold text-slate-900">
+            Sign In
+          </h2>
+
+          <p className="text-slate-500 mt-2 mb-8">
+            Login to access your account.
+          </p>
+
+          <form onSubmit={handleLogin} className="space-y-5">
+
+            {/* Role */}
+
             <div>
-              <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+              <label className="text-sm font-medium text-slate-600">
                 Login As
               </label>
-              <div className="grid grid-cols-2 gap-2 bg-slate-200 p-1 rounded-xl">
+
+              <div className="grid grid-cols-2 gap-2 bg-slate-100 rounded-xl p-1 mt-2">
+
                 <button
                   type="button"
-                  onClick={() => setRole('student')}
-                  className={`py-2 text-xs font-bold rounded-lg transition-all ${
-                    role === 'student'
-                      ? 'bg-white text-indigo-700 shadow-md'
-                      : 'text-slate-600 hover:text-slate-900'
+                  onClick={() => setRole("student")}
+                  className={`py-2 rounded-lg font-medium transition ${
+                    role === "student"
+                      ? "bg-white shadow text-indigo-700"
+                      : "text-slate-600"
                   }`}
                 >
-                  👨‍🎓 Student
+                  Student
                 </button>
+
                 <button
                   type="button"
-                  onClick={() => setRole('instructor')}
-                  className={`py-2 text-xs font-bold rounded-lg transition-all ${
-                    role === 'instructor'
-                      ? 'bg-white text-indigo-700 shadow-md'
-                      : 'text-slate-600 hover:text-slate-900'
+                  onClick={() => setRole("instructor")}
+                  className={`py-2 rounded-lg font-medium transition ${
+                    role === "instructor"
+                      ? "bg-white shadow text-indigo-700"
+                      : "text-slate-600"
                   }`}
                 >
-                  👨‍🏫 Instructor
+                  Instructor
                 </button>
+
               </div>
             </div>
 
-            {/* Email Form Field */}
+            {/* Email */}
+
             <div>
-              <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">
-                Email Address
+              <label className="text-sm font-medium text-slate-600">
+                Email
               </label>
+
               <input
                 type="email"
                 required
-                autoComplete="email"
+                placeholder="Enter your email"
                 value={email}
-                onChange={handleEmailChange}
-                className={`w-full px-4 py-2.5 text-sm bg-white border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900 placeholder:text-slate-400 font-medium transition-all ${
-                  emailError ? 'border-red-500' : 'border-slate-300'
-                }`}
-                placeholder="example@eduverse.com"
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full mt-2 px-4 py-3 border rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none"
               />
-              {emailError && (
-                <p className="text-red-600 text-xs mt-1 font-medium">{emailError}</p>
-              )}
             </div>
 
-            {/* Password Form Field */}
+            {/* Password */}
+
             <div>
-              <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+
+              <label className="text-sm font-medium text-slate-600">
                 Password
               </label>
-              <div className="relative">
+
+              <div className="relative mt-2">
+
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   required
-                  autoComplete="current-password"
+                  placeholder="Enter password"
                   value={password}
-                  onChange={handlePasswordChange}
-                  className={`w-full px-4 py-2.5 text-sm bg-white border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900 placeholder:text-slate-400 font-medium transition-all ${
-                    passwordError ? 'border-red-500' : 'border-slate-300'
-                  }`}
-                  placeholder="••••••••"
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none"
                 />
+
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-800 transition-colors"
+                  onClick={() =>
+                    setShowPassword(!showPassword)
+                  }
+                  className="absolute right-4 top-1/2 -translate-y-1/2"
                 >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  {showPassword ? (
+                    <EyeOff size={18} />
+                  ) : (
+                    <Eye size={18} />
+                  )}
                 </button>
+
               </div>
 
-              
-              {passwordError && (
-                <p className="text-red-600 text-xs mt-1 font-medium">{passwordError}</p>
-              )}
             </div>
 
-            {/* Remember Me and Password Recovery links */}
-            <div className="flex items-center justify-between pt-1">
-              <label className="flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4 text-indigo-600 border-2 border-slate-300 rounded focus:ring-indigo-500 cursor-pointer"
-                />
-                <span className="ml-2 text-xs font-medium text-slate-600">Remember me</span>
+            {/* Remember */}
+
+            <div className="flex justify-between items-center">
+
+              <label className="flex items-center gap-2 text-sm">
+
+                <input type="checkbox" />
+
+                Remember me
+
               </label>
-              <Link to="/forgot-password" className="text-xs font-bold text-indigo-600 hover:underline">
+
+              <Link
+                to="/forgot-password"
+                className="text-indigo-600 text-sm"
+              >
                 Forgot Password?
               </Link>
+
             </div>
 
-            {/* Form submission Trigger */}
+            {/* Button */}
+
             <button
-              type="submit"
-              disabled={isFormInvalid}
-              className="w-full bg-indigo-600 text-white py-3 rounded-xl text-sm font-bold shadow-md transition-all active:scale-[0.98] mt-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 hover:bg-indigo-700"
+              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-semibold transition"
             >
-              {isLoading ? 'Loading...' : 'Sign In'}
+              {loading ? "Loading..." : "Sign In"}
             </button>
+
           </form>
 
-          {/* Account Creation Prompt */}
-          <p className="text-xs text-center text-slate-500 mt-6">
-            New to EduVerse?{' '}
-            <Link to="/signup" className="text-indigo-600 hover:underline font-bold">
-              Create account
+          <p className="text-center mt-6 text-sm text-slate-600">
+            Don't have an account?{" "}
+            <Link
+              to="/signup"
+              className="text-indigo-600 font-semibold"
+            >
+              Create Account
             </Link>
           </p>
+
         </div>
 
       </div>
