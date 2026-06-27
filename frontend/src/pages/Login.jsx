@@ -15,9 +15,6 @@ const Login = () => {
     setLoading(true);
 
     console.log({
-
-      
-
       role,
       email,
       password,
@@ -274,6 +271,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
-
