@@ -26,6 +26,9 @@ const CategoryCard = ({ category }) => {
         <FaArrowRight className="text-sm" />
       </div>
     </div>
+
+
+
   );
 };
 

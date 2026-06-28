@@ -24,6 +24,8 @@ const Categories = () => {
           />
         ))}
       </div>
+
+      
     </section>
   );
 };
