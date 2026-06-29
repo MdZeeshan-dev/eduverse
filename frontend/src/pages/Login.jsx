@@ -129,3 +129,90 @@ const Login = () => {
                     </div>
 
                   </div>
+
+                                    <div className="flex items-center justify-between text-sm">
+
+                    <label className="flex items-center gap-2 text-gray-600">
+
+                      <input
+                        type="checkbox"
+                        checked={remember}
+                        onChange={() => setRemember(!remember)}
+                        className="accent-blue-600"
+                      />
+
+                      Remember me
+
+                    </label>
+
+                    <Link
+                      to="/forgot-password"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Forgot Password?
+                    </Link>
+
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700"
+                  >
+                    Login
+                  </button>
+
+                  <div className="flex items-center gap-3">
+
+                    <div className="h-px flex-1 bg-gray-300"></div>
+
+                    <span className="text-sm text-gray-500">
+                      OR
+                    </span>
+
+                    <div className="h-px flex-1 bg-gray-300"></div>
+
+                  </div>
+
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-gray-300 py-3 font-medium transition hover:bg-gray-50"
+                  >
+                    <img
+                      src="https://www.svgrepo.com/show/475656/google-color.svg"
+                      alt="Google"
+                      className="h-5 w-5"
+                    />
+
+                    Continue with Google
+                  </button>
+
+                  <p className="text-center text-sm text-gray-600">
+
+                    Don't have an account?{" "}
+
+                    <Link
+                      to="/signup"
+                      className="font-semibold text-blue-600 hover:underline"
+                    >
+                      Sign Up
+                    </Link>
+
+                  </p>
+
+                </form>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </main>
+
+    </>
+  );
+};
+
+export default Login;
