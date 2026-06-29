@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  User,
-  Mail,
-  Lock,
-  Eye,
-  EyeOff,
-} from "lucide-react";
+import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import Navbar from "../components/common/Navbar";
 
 const Signup = () => {
@@ -16,8 +10,7 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [agree, setAgree] = useState(false);
 
@@ -38,39 +31,30 @@ const Signup = () => {
       <Navbar authPage={true} />
 
       <main className="h-[calc(100vh-64px)] bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center px-4">
-
-        <div className="w-full max-w-3xl -translate-y-1 bg-white rounded-3xl shadow-xl overflow-hidden">
-
+        <div className="w-full max-w-2xl -translate-y-6 bg-white rounded-3xl shadow-xl overflow-hidden">
           <div className="grid lg:grid-cols-2">
-
             {/* Left Side */}
 
-            <div className="hidden lg:flex flex-col items-center justify-center bg-blue-50 p-8">
-
+            <div className="hidden lg:flex flex-col items-center justify-center bg-blue-50 p-6">
               <img
                 src="https://placehold.co/280x280"
                 alt="Signup Illustration"
-                className="w-52 mb-6"
+                className="w-40 mb-4"
               />
 
-
-
-              <h2 className="text-3xl font-bold text-gray-800 mb-3">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">
                 Join EduVerse 🚀
               </h2>
 
-              <p className="text-center text-gray-600 leading-7">
+              <p className="text-center text-gray-600 leading-6 text-sm">
                 Create your account and start your learning journey today.
               </p>
-
             </div>
 
             {/* Right Side */}
 
-            <div className="flex items-center justify-center p-8">
-
+            <div className="flex items-center justify-center p-6">
               <div className="w-full max-w-sm">
-
                 <h1 className="text-3xl font-bold text-gray-900">
                   Create Account
                 </h1>
@@ -79,21 +63,15 @@ const Signup = () => {
                   Create your EduVerse account.
                 </p>
 
-                <form
-                  onSubmit={handleSubmit}
-                  className="space-y-4"
-                >
-
+                <form onSubmit={handleSubmit} className="space-y-3">
                   {/* Full Name */}
 
                   <div>
-
                     <label className="block text-sm font-medium mb-2">
                       Full Name
                     </label>
 
                     <div className="relative">
-
                       <User
                         size={18}
                         className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
@@ -104,23 +82,19 @@ const Signup = () => {
                         placeholder="Enter your full name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full rounded-xl border border-gray-300 py-3 pl-11 pr-4 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                        className="w-full rounded-xl border border-gray-300 py-2.5 pl-11 pr-4 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       />
-
                     </div>
-
                   </div>
 
                   {/* Email */}
 
                   <div>
-
                     <label className="block text-sm font-medium mb-2">
                       Email Address
                     </label>
 
                     <div className="relative">
-
                       <Mail
                         size={18}
                         className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
@@ -131,23 +105,19 @@ const Signup = () => {
                         placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full rounded-xl border border-gray-300 py-3 pl-11 pr-4 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                        className="w-full rounded-xl border border-gray-300 py-2.5 pl-11 pr-4 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       />
-
                     </div>
-
                   </div>
 
                   {/* Password */}
 
                   <div>
-
                     <label className="block text-sm font-medium mb-2">
                       Password
                     </label>
 
                     <div className="relative">
-
                       <Lock
                         size={18}
                         className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
@@ -158,14 +128,12 @@ const Signup = () => {
                         placeholder="Create password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full rounded-xl border border-gray-300 py-3 pl-11 pr-12 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                        className="w-full rounded-xl border border-gray-300 py-2.5 pl-11 pr-12 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       />
 
                       <button
                         type="button"
-                        onClick={() =>
-                          setShowPassword(!showPassword)
-                        }
+                        onClick={() => setShowPassword(!showPassword)}
                         className="absolute right-4 top-1/2 -translate-y-1/2"
                       >
                         {showPassword ? (
@@ -174,21 +142,17 @@ const Signup = () => {
                           <Eye size={20} />
                         )}
                       </button>
-
                     </div>
-
                   </div>
 
-                                    {/* Confirm Password */}
+                  {/* Confirm Password */}
 
                   <div>
-
                     <label className="block text-sm font-medium mb-2">
                       Confirm Password
                     </label>
 
                     <div className="relative">
-
                       <Lock
                         size={18}
                         className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
@@ -198,18 +162,14 @@ const Signup = () => {
                         type={showConfirmPassword ? "text" : "password"}
                         placeholder="Confirm password"
                         value={confirmPassword}
-                        onChange={(e) =>
-                          setConfirmPassword(e.target.value)
-                        }
-                        className="w-full rounded-xl border border-gray-300 py-3 pl-11 pr-12 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        className="w-full rounded-xl border border-gray-300 py-2.5 pl-11 pr-12 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       />
 
                       <button
                         type="button"
                         onClick={() =>
-                          setShowConfirmPassword(
-                            !showConfirmPassword
-                          )
+                          setShowConfirmPassword(!showConfirmPassword)
                         }
                         className="absolute right-4 top-1/2 -translate-y-1/2"
                       >
@@ -219,31 +179,26 @@ const Signup = () => {
                           <Eye size={20} />
                         )}
                       </button>
-
                     </div>
-
                   </div>
 
                   {/* Terms */}
 
                   <label className="flex items-center gap-2 text-sm text-gray-600">
-
                     <input
                       type="checkbox"
                       checked={agree}
                       onChange={() => setAgree(!agree)}
                       className="accent-blue-600"
                     />
-
                     I agree to the Terms & Conditions
-
                   </label>
 
                   {/* Button */}
 
                   <button
                     type="submit"
-                    className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700"
+                    className="w-full rounded-xl bg-blue-600 py-2.5 font-semibold text-white transition hover:bg-blue-700"
                   >
                     Create Account
                   </button>
@@ -251,60 +206,44 @@ const Signup = () => {
                   {/* Divider */}
 
                   <div className="flex items-center gap-3">
-
                     <div className="h-px flex-1 bg-gray-300"></div>
 
-                    <span className="text-sm text-gray-500">
-                      OR
-                    </span>
+                    <span className="text-sm text-gray-500">OR</span>
 
                     <div className="h-px flex-1 bg-gray-300"></div>
-
                   </div>
 
                   {/* Google */}
 
                   <button
                     type="button"
-                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-gray-300 py-3 font-medium transition hover:bg-gray-50"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-gray-300 py-2.5 font-medium transition hover:bg-gray-50"
                   >
                     <img
                       src="https://www.svgrepo.com/show/475656/google-color.svg"
                       alt="Google"
                       className="h-5 w-5"
                     />
-
                     Continue with Google
-
                   </button>
 
                   {/* Bottom */}
 
                   <p className="text-center text-sm text-gray-600">
-
                     Already have an account?{" "}
-
                     <Link
                       to="/login"
                       className="font-semibold text-blue-600 hover:underline"
                     >
                       Login
                     </Link>
-
                   </p>
-
                 </form>
-
               </div>
-
             </div>
-
           </div>
-
         </div>
-
       </main>
-
     </>
   );
 };
