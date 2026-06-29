@@ -7,7 +7,7 @@ const navLinks = [
   { name: "Courses", path: "/courses" },
 ];
 
-const Navbar = () => {
+const Navbar = ({ authPage = false }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -33,59 +33,64 @@ const Navbar = () => {
           </div>
         </NavLink>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <li key={link.path}>
+        {/* Hide everything on Auth Pages */}
+        {!authPage && (
+          <>
+            {/* Desktop Navigation */}
+            <ul className="hidden items-center gap-8 md:flex">
+              {navLinks.map((link) => (
+                <li key={link.path}>
+                  <NavLink
+                    end={link.path === "/"}
+                    to={link.path}
+                    className={({ isActive }) =>
+                      `relative pb-1 text-sm font-semibold transition-all duration-300 ${
+                        isActive
+                          ? "text-blue-600 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-blue-600"
+                          : "text-gray-700 hover:text-blue-600 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full"
+                      }`
+                    }
+                  >
+                    {link.name}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+
+            {/* Right Side */}
+            <div className="hidden items-center gap-3 md:flex">
+              <button className="rounded-full p-2 text-gray-600 transition-all duration-300 hover:bg-gray-100 hover:text-blue-600">
+                <Search size={20} />
+              </button>
+
               <NavLink
-                end={link.path === "/"}
-                to={link.path}
-                className={({ isActive }) =>
-                  `relative pb-1 text-sm font-semibold transition-all duration-300 ${
-                    isActive
-                      ? "text-blue-600 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-blue-600"
-                      : "text-gray-700 hover:text-blue-600 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full"
-                  }`
-                }
+                to="/login"
+                className="rounded-xl border border-gray-300 px-5 py-2 text-sm font-semibold text-gray-700 transition-all duration-300 hover:border-blue-600 hover:text-blue-600"
               >
-                {link.name}
+                Login
               </NavLink>
-            </li>
-          ))}
-        </ul>
 
-        {/* Right Side */}
-        <div className="hidden items-center gap-3 md:flex">
-          <button className="rounded-full p-2 text-gray-600 transition-all duration-300 hover:bg-gray-100 hover:text-blue-600">
-            <Search size={20} />
-          </button>
+              <NavLink
+                to="/signup"
+                className="rounded-xl bg-blue-600 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-xl"
+              >
+                Get Started
+              </NavLink>
+            </div>
 
-          <NavLink
-            to="/login"
-            className="rounded-xl border border-gray-300 px-5 py-2 text-sm font-semibold text-gray-700 transition-all duration-300 hover:border-blue-600 hover:text-blue-600"
-          >
-            Login
-          </NavLink>
-
-          <NavLink
-            to="/signup"
-            className="rounded-xl bg-blue-600 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-xl"
-          >
-            Get Started
-          </NavLink>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="rounded-lg p-2 transition hover:bg-gray-100 md:hidden"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="rounded-lg p-2 transition hover:bg-gray-100 md:hidden"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </>
+        )}
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
+      {!authPage && isOpen && (
         <div className="border-t border-gray-200 bg-white md:hidden">
           <div className="flex flex-col px-6 py-5">
             {navLinks.map((link) => (
