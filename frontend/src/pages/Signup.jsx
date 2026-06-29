@@ -30,7 +30,7 @@ const Signup = () => {
     <>
       <Navbar authPage={true} />
 
-      <main className="h-[calc(100vh-64px)] overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center px-4">
+     <main className="h-[calc(100dvh-64px)] flex items-center justify-center px-4 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50">
        <div className="w-full max-w-2xl bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className="grid lg:grid-cols-2">
             {/* Left Side */}
