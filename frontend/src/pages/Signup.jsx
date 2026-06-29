@@ -176,3 +176,135 @@ const Signup = () => {
                     </div>
 
                   </div>
+
+                                    {/* Confirm Password */}
+
+                  <div>
+
+                    <label className="block text-sm font-medium mb-2">
+                      Confirm Password
+                    </label>
+
+                    <div className="relative">
+
+                      <Lock
+                        size={18}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                      />
+
+                      <input
+                        type={showConfirmPassword ? "text" : "password"}
+                        placeholder="Confirm password"
+                        value={confirmPassword}
+                        onChange={(e) =>
+                          setConfirmPassword(e.target.value)
+                        }
+                        className="w-full rounded-xl border border-gray-300 py-3 pl-11 pr-12 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                      />
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setShowConfirmPassword(
+                            !showConfirmPassword
+                          )
+                        }
+                        className="absolute right-4 top-1/2 -translate-y-1/2"
+                      >
+                        {showConfirmPassword ? (
+                          <EyeOff size={20} />
+                        ) : (
+                          <Eye size={20} />
+                        )}
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                  {/* Terms */}
+
+                  <label className="flex items-center gap-2 text-sm text-gray-600">
+
+                    <input
+                      type="checkbox"
+                      checked={agree}
+                      onChange={() => setAgree(!agree)}
+                      className="accent-blue-600"
+                    />
+
+                    I agree to the Terms & Conditions
+
+                  </label>
+
+                  {/* Button */}
+
+                  <button
+                    type="submit"
+                    className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700"
+                  >
+                    Create Account
+                  </button>
+
+                  {/* Divider */}
+
+                  <div className="flex items-center gap-3">
+
+                    <div className="h-px flex-1 bg-gray-300"></div>
+
+                    <span className="text-sm text-gray-500">
+                      OR
+                    </span>
+
+                    <div className="h-px flex-1 bg-gray-300"></div>
+
+                  </div>
+
+                  {/* Google */}
+
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-gray-300 py-3 font-medium transition hover:bg-gray-50"
+                  >
+                    <img
+                      src="https://www.svgrepo.com/show/475656/google-color.svg"
+                      alt="Google"
+                      className="h-5 w-5"
+                    />
+
+                    Continue with Google
+
+                  </button>
+
+                  {/* Bottom */}
+
+                  <p className="text-center text-sm text-gray-600">
+
+                    Already have an account?{" "}
+
+                    <Link
+                      to="/login"
+                      className="font-semibold text-blue-600 hover:underline"
+                    >
+                      Login
+                    </Link>
+
+                  </p>
+
+                </form>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </main>
+
+    </>
+  );
+};
+
+export default Signup;
