@@ -30,8 +30,8 @@ const Signup = () => {
     <>
       <Navbar authPage={true} />
 
-      <main className="h-[calc(100vh-64px)] bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center px-4">
-        <div className="w-full max-w-2xl -translate-y-6 bg-white rounded-3xl shadow-xl overflow-hidden">
+      <main className="h-[calc(100vh-64px)] overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center px-4">
+       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className="grid lg:grid-cols-2">
             {/* Left Side */}
 
@@ -42,7 +42,7 @@ const Signup = () => {
                 className="w-40 mb-4"
               />
 
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">
+              <h2 className="text-2xl font-bold text-gray-800 mb-1">
                 Join EduVerse 🚀
               </h2>
 
@@ -56,18 +56,18 @@ const Signup = () => {
             <div className="flex items-center justify-center p-6">
               <div className="w-full max-w-sm">
                 <h1 className="text-3xl font-bold text-gray-900">
-                  Create Account
+                  Signup
                 </h1>
 
-                <p className="text-gray-500 mt-2 mb-6">
+                <p className="text-gray-500 mt-1 mb-4 text-sm">
                   Create your EduVerse account.
                 </p>
 
-                <form onSubmit={handleSubmit} className="space-y-3">
+                <form onSubmit={handleSubmit} className="space-y-2">
                   {/* Full Name */}
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">
+                    <label className="block text-sm font-medium mb-1">
                       Full Name
                     </label>
 
@@ -90,7 +90,7 @@ const Signup = () => {
                   {/* Email */}
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">
+                    <label className="block text-sm font-medium mb-1">
                       Email Address
                     </label>
 
@@ -113,7 +113,7 @@ const Signup = () => {
                   {/* Password */}
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">
+                    <label className="block text-sm font-medium mb-1">
                       Password
                     </label>
 
@@ -148,7 +148,7 @@ const Signup = () => {
                   {/* Confirm Password */}
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">
+                    <label className="block text-sm font-medium mb-1">
                       Confirm Password
                     </label>
 
