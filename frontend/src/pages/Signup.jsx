@@ -7,7 +7,7 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/common/Navbar";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -39,7 +39,7 @@ const Signup = () => {
 
       <main className="h-[calc(100vh-64px)] bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center px-4">
 
-        <div className="w-full max-w-3xl -translate-y-6 bg-white rounded-3xl shadow-xl overflow-hidden">
+        <div className="w-full max-w-3xl -translate-y-1 bg-white rounded-3xl shadow-xl overflow-hidden">
 
           <div className="grid lg:grid-cols-2">
 
