@@ -1,94 +1,165 @@
 import { useMemo, useState } from "react";
 import { courses } from "../data/courses";
-import CourseCard from "../components/courses/CourseCard";
+
+import SidebarFilter from "../components/courses/SidebarFilter";
 import SearchBar from "../components/courses/SearchBar";
-import CategoryFilter from "../components/courses/CategoryFilter";
+import SortDropdown from "../components/courses/SortDropdown";
+import CourseCard from "../components/courses/CourseCard";
 
 const Courses = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-
-  const categories = useMemo(() => {
-    return ["All", ...new Set(courses.map((course) => course.category))];
-  }, []);
+  const [sortBy, setSortBy] = useState("popular");
 
   const filteredCourses = useMemo(() => {
-    return courses.filter((course) => {
-      const matchesSearch =
+    let filtered = [...courses];
+
+    // Search
+    filtered = filtered.filter(
+      (course) =>
         course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.instructor.toLowerCase().includes(searchTerm.toLowerCase());
+        course.instructor.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
-      const matchesCategory =
-        selectedCategory === "All" ||
-        course.category === selectedCategory;
+    // Category
+    if (selectedCategory !== "All") {
+      filtered = filtered.filter(
+        (course) => course.category === selectedCategory
+      );
+    }
 
-      return matchesSearch && matchesCategory;
-    });
-  }, [searchTerm, selectedCategory]);
+    // Sorting
+    switch (sortBy) {
+      case "rating":
+        filtered.sort((a, b) => b.rating - a.rating);
+        break;
+
+      case "price-low":
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+
+      case "price-high":
+        filtered.sort((a, b) => b.price - a.price);
+        break;
+
+      case "latest":
+        filtered.reverse();
+        break;
+
+      default:
+        filtered.sort((a, b) => b.students - a.students);
+    }
+
+    return filtered;
+  }, [searchTerm, selectedCategory, sortBy]);
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      {/* Hero */}
-      <section className="bg-gradient-to-r from-blue-600 to-indigo-600 py-16">
-        <div className="mx-auto max-w-7xl px-4 text-center">
-          <h1 className="text-4xl font-bold text-white md:text-5xl">
-            Explore Our Courses
+    <main className="bg-gray-50 min-h-screen">
+
+      <div className="mx-auto max-w-7xl px-4 py-10">
+
+        {/* Heading */}
+
+        <div className="mb-8">
+
+          <h1 className="text-4xl font-bold text-gray-900">
+            Explore Courses
           </h1>
 
-          <p className="mt-4 text-blue-100">
-            Learn in-demand skills with industry experts.
+          <p className="mt-2 text-gray-600">
+            Discover top-quality courses and start learning today.
           </p>
 
-          <div className="mx-auto mt-8 max-w-2xl">
-            <SearchBar
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
+        </div>
+
+        {/* Layout */}
+
+        <div className="grid gap-8 lg:grid-cols-4">
+
+          {/* Sidebar */}
+
+          <div className="lg:col-span-1">
+
+            <SidebarFilter
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
             />
-          </div>
-        </div>
-      </section>
 
-      {/* Courses Section */}
-      <section className="mx-auto max-w-7xl px-4 py-12">
-        <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <h2 className="text-3xl font-bold text-gray-900">
-              All Courses
-            </h2>
-
-            <p className="mt-2 text-gray-500">
-              {filteredCourses.length} Courses Available
-            </p>
           </div>
 
-          <CategoryFilter
-            categories={categories}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-          />
-        </div>
+          {/* Right */}
 
-        {filteredCourses.length === 0 ? (
-          <div className="rounded-2xl bg-white py-20 text-center shadow">
-            <h3 className="text-2xl font-semibold text-gray-700">
-              No Courses Found
-            </h3>
+          <div className="lg:col-span-3">
 
-            <p className="mt-2 text-gray-500">
-              Try another search keyword or category.
-            </p>
-          </div>
-        ) : (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {filteredCourses.map((course) => (
-              <CourseCard
-                key={course.id}
-                course={course}
+            {/* Search + Sort */}
+
+            <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+
+              <div className="flex-1">
+
+                <SearchBar
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                />
+
+              </div>
+
+              <SortDropdown
+                sortBy={sortBy}
+                setSortBy={setSortBy}
               />
-            ))}
+
+            </div>
+
+            {/* Result */}
+
+            <div className="mb-6">
+
+              <h2 className="text-xl font-semibold text-gray-800">
+                {filteredCourses.length} Courses Found
+              </h2>
+
+            </div>
+
+            {/* Cards */}
+
+            {filteredCourses.length === 0 ? (
+
+              <div className="rounded-2xl bg-white py-20 text-center shadow">
+
+                <h3 className="text-2xl font-semibold text-gray-700">
+                  No Courses Found
+                </h3>
+
+                <p className="mt-3 text-gray-500">
+                  Try another search keyword or category.
+                </p>
+
+              </div>
+
+            ) : (
+
+              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+
+                {filteredCourses.map((course) => (
+
+                  <CourseCard
+                    key={course.id}
+                    course={course}
+                  />
+
+                ))}
+
+              </div>
+
+            )}
+
           </div>
-        )}
-      </section>
+
+        </div>
+
+      </div>
+
     </main>
   );
 };
