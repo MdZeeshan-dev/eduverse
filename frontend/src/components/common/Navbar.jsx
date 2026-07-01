@@ -22,6 +22,8 @@ const Navbar = ({ authPage = false }) => {
             <GraduationCap size={22} />
           </div>
 
+          
+
           <div>
             <h1 className="text-xl font-extrabold tracking-tight text-gray-900">
               EduVerse
