@@ -33,11 +33,13 @@ const Navbar = ({ authPage = false }) => {
           </div>
         </NavLink>
 
-        
+
 
         {/* Hide everything on Auth Pages */}
         {!authPage && (
           <>
+
+          
             {/* Desktop Navigation */}
             <ul className="hidden items-center gap-8 md:flex">
               {navLinks.map((link) => (
