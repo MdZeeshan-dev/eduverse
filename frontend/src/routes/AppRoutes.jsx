@@ -28,8 +28,6 @@ const AppRoutes = () => {
       <Route path="/watch-course/:id" element={<WatchCourse />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/profile" element={<Profile />} />
-
-      {/* 404 */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
