@@ -27,6 +27,8 @@ const Navbar = ({ authPage = false }) => {
               EduVerse
             </h1>
 
+            
+
             <p className="-mt-1 text-xs text-gray-500">Learn Without Limits</p>
           </div>
         </NavLink>
