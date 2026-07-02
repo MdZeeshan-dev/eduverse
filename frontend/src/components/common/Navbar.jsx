@@ -41,6 +41,8 @@ const Navbar = ({ authPage = false }) => {
 
           
             {/* Desktop Navigation */}
+
+            
             <ul className="hidden items-center gap-8 md:flex">
               {navLinks.map((link) => (
                 <li key={link.path}>
