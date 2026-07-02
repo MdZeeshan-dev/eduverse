@@ -69,3 +69,4 @@ export const courses = [
     originalPrice: 1199,
   },
 ];
+
