@@ -37,6 +37,8 @@ const Navbar = ({ authPage = false }) => {
 
         {/* Hide everything on Auth Pages */}
         {!authPage && (
+
+          
           <>
 
           
