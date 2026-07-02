@@ -52,11 +52,13 @@ const Navbar = ({ authPage = false }) => {
                 <li key={link.path}>
 
 
-                  
+
 
 
                   <NavLink
                     end={link.path === "/"}
+
+                    
                     to={link.path}
                     className={({ isActive }) =>
                       `relative pb-1 text-sm font-semibold transition-all duration-300 ${
