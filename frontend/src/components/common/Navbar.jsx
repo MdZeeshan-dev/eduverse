@@ -60,9 +60,11 @@ const Navbar = ({ authPage = false }) => {
 
 
                     to={link.path}
+
+                    
                     className={({ isActive }) =>
 
-                      
+
                       `relative pb-1 text-sm font-semibold transition-all duration-300 ${
                         isActive
                           ? "text-blue-600 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-blue-600"
