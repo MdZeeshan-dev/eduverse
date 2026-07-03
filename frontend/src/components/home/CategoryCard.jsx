@@ -11,14 +11,10 @@ const CategoryCard = ({ category }) => {
       </div>
 
       {/* Title */}
-      <h3 className="text-xl font-semibold text-gray-900">
-        {title}
-      </h3>
+      <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
 
       {/* Courses */}
-      <p className="mt-2 text-gray-500">
-        {courses}+ Courses
-      </p>
+      <p className="mt-2 text-gray-500">{courses}+ Courses</p>
 
       {/* Explore */}
       <div className="mt-6 flex items-center gap-2 font-medium text-blue-600 transition-all duration-300 group-hover:gap-3">
@@ -26,9 +22,6 @@ const CategoryCard = ({ category }) => {
         <FaArrowRight className="text-sm" />
       </div>
     </div>
-
-
-
   );
 };
 
