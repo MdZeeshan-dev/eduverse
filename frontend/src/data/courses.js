@@ -58,8 +58,7 @@ export const courses = [
     title: "Data Structures & Algorithms",
     instructor: "Mark Wilson",
     category: "Programming",
-    description:
-      "Master DSA with Java and prepare for coding interviews.",
+    description: "Master DSA with Java and prepare for coding interviews.",
     rating: 4.8,
     level: "Advanced",
     duration: "35 Hours",
@@ -69,4 +68,3 @@ export const courses = [
     originalPrice: 1199,
   },
 ];
-
