@@ -1,13 +1,7 @@
 import { FaStar, FaUsers } from "react-icons/fa";
 
 const InstructorCard = ({ instructor }) => {
-  const {
-    name,
-    role,
-    rating,
-    students,
-    initials,
-  } = instructor;
+  const { name, role, rating, students, initials } = instructor;
 
   return (
     <div className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
@@ -18,13 +12,9 @@ const InstructorCard = ({ instructor }) => {
 
       {/* Info */}
       <div className="mt-5 text-center">
-        <h3 className="text-xl font-semibold text-gray-900">
-          {name}
-        </h3>
+        <h3 className="text-xl font-semibold text-gray-900">{name}</h3>
 
-        <p className="mt-1 text-sm text-gray-500">
-          {role}
-        </p>
+        <p className="mt-1 text-sm text-gray-500">{role}</p>
       </div>
 
       {/* Stats */}
