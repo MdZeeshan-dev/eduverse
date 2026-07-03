@@ -16,11 +16,7 @@ const CourseCard = ({ course }) => {
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
       {/* Course Image */}
-      <img
-        src={image}
-        alt={title}
-        className="h-40 w-full object-cover"
-      />
+      <img src={image} alt={title} className="h-40 w-full object-cover" />
 
       {/* Content */}
       <div className="space-y-3 p-4">
@@ -61,9 +57,7 @@ const CourseCard = ({ course }) => {
 
         {/* Price */}
         <div className="flex items-center gap-2">
-          <span className="text-xl font-bold text-blue-600">
-            ₹{price}
-          </span>
+          <span className="text-xl font-bold text-blue-600">₹{price}</span>
 
           <span className="text-sm text-gray-400 line-through">
             ₹{originalPrice}
