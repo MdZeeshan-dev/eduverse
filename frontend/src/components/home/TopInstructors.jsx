@@ -18,10 +18,7 @@ const TopInstructors = () => {
       {/* Cards */}
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {instructors.map((instructor) => (
-          <InstructorCard
-            key={instructor.id}
-            instructor={instructor}
-          />
+          <InstructorCard key={instructor.id} instructor={instructor} />
         ))}
       </div>
     </section>
