@@ -6,9 +6,7 @@ const FeaturedCourses = () => {
     <section className="mx-auto max-w-7xl px-6 py-16">
       <div className="mb-10 flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900">
-            Featured Courses
-          </h2>
+          <h2 className="text-3xl font-bold text-gray-900">Featured Courses</h2>
 
           <p className="mt-2 text-gray-500">
             Learn from industry experts with premium quality courses.
