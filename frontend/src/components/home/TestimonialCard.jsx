@@ -18,9 +18,7 @@ const TestimonialCard = ({ testimonial }) => {
       </div>
 
       {/* Review */}
-      <p className="text-gray-600 leading-7 italic">
-        "{review}"
-      </p>
+      <p className="text-gray-600 leading-7 italic">"{review}"</p>
 
       {/* User */}
       <div className="mt-8 flex items-center gap-4">
@@ -29,13 +27,9 @@ const TestimonialCard = ({ testimonial }) => {
         </div>
 
         <div>
-          <h3 className="font-semibold text-gray-900">
-            {name}
-          </h3>
+          <h3 className="font-semibold text-gray-900">{name}</h3>
 
-          <p className="text-sm text-gray-500">
-            {role}
-          </p>
+          <p className="text-sm text-gray-500">{role}</p>
         </div>
       </div>
     </div>
