@@ -12,7 +12,6 @@ const InstructorCard = ({ instructor }) => {
 
       {/* Info */}
       <div className="mt-5 text-center">
-        
         <h3 className="text-xl font-semibold text-gray-900">{name}</h3>
 
         <p className="mt-1 text-sm text-gray-500">{role}</p>
