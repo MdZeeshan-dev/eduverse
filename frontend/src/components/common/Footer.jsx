@@ -15,9 +15,7 @@ const Footer = () => {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Logo */}
           <div>
-            <h2 className="text-3xl font-bold text-white">
-              EduVerse
-            </h2>
+            <h2 className="text-3xl font-bold text-white">EduVerse</h2>
 
             <p className="mt-4 leading-7 text-gray-400">
               Learn modern skills with premium courses, expert mentors and
@@ -68,9 +66,7 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="mb-5 text-xl font-semibold text-white">
-              Contact
-            </h3>
+            <h3 className="mb-5 text-xl font-semibold text-white">Contact</h3>
 
             <div className="space-y-4">
               <div className="flex items-center gap-3">
@@ -112,9 +108,7 @@ const Footer = () => {
         {/* Bottom */}
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-gray-800 pt-6 text-sm text-gray-500 md:flex-row">
-          <p>
-            © {new Date().getFullYear()} EduVerse. All Rights Reserved.
-          </p>
+          <p>© {new Date().getFullYear()} EduVerse. All Rights Reserved.</p>
 
           <div className="flex gap-6">
             <span className="cursor-pointer hover:text-blue-400">
