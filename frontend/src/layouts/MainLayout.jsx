@@ -7,12 +7,7 @@ const MainLayout = () => {
       <Navbar />
       <Outlet />
     </>
-
-
   );
 };
 
 export default MainLayout;
-
-
-
