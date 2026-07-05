@@ -25,7 +25,6 @@ const InstructorCard = ({ instructor }) => {
         </div>
 
         <div className="flex items-center gap-1">
-          
           <FaUsers className="text-blue-600" />
           <span>{(students / 1000).toFixed(1)}k</span>
         </div>
