@@ -29,6 +29,7 @@ const InstructorCard = ({ instructor }) => {
           <span>{(students / 1000).toFixed(1)}k</span>
         </div>
       </div>
+      
 
       {/* Button */}
       <button className="mt-6 w-full rounded-lg bg-blue-600 py-2.5 font-medium text-white transition-colors duration-300 hover:bg-blue-700">
