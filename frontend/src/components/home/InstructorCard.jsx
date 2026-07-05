@@ -22,8 +22,6 @@ const InstructorCard = ({ instructor }) => {
         <div className="flex items-center gap-1">
           <FaStar className="text-yellow-400" />
           <span>{rating}</span>
-
-          
         </div>
 
         <div className="flex items-center gap-1">
