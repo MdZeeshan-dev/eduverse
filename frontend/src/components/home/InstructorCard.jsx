@@ -28,7 +28,6 @@ const InstructorCard = ({ instructor }) => {
           <FaUsers className="text-blue-600" />
           <span>{(students / 1000).toFixed(1)}k</span>
         </div>
-        
       </div>
 
       {/* Button */}
