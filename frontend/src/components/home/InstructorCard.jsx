@@ -37,10 +37,7 @@ const InstructorCard = ({ instructor }) => {
       </button>
     </div>
   );
-
-  
 };
-
 
 
 export default InstructorCard;
