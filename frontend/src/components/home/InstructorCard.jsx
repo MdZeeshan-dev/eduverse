@@ -39,5 +39,4 @@ const InstructorCard = ({ instructor }) => {
   );
 };
 
-
 export default InstructorCard;
