@@ -37,6 +37,8 @@ const InstructorCard = ({ instructor }) => {
       </button>
     </div>
   );
+
+  
 };
 
 
