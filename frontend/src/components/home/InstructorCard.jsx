@@ -43,7 +43,3 @@ export default InstructorCard;
 
 
 
-
-
-
-
