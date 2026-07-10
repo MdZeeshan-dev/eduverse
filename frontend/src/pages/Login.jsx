@@ -5,14 +5,12 @@ import Navbar from "../components/common/Navbar";
 
 const Login = () => {
 
-
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [remember, setRemember] = useState(false);
 
-
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({ email, password, remember });
