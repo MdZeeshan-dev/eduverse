@@ -64,6 +64,9 @@ const Footer = () => {
             </ul>
           </div>
 
+
+
+
           {/* Contact */}
           <div>
             <h3 className="mb-5 text-xl font-semibold text-white">Contact</h3>
