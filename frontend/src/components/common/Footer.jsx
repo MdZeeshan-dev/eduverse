@@ -69,8 +69,6 @@ const Footer = () => {
             <h3 className="mb-5 text-xl font-semibold text-white">Contact</h3>
 
             <div className="space-y-4">
-
-              
               <div className="flex items-center gap-3">
                 <FaEnvelope className="text-blue-500" />
                 <span>support@eduverse.com</span>
