@@ -4,8 +4,6 @@ import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import Navbar from "../components/common/Navbar";
 
 const Login = () => {
-
-  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
