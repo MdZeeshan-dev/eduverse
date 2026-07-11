@@ -13,8 +13,6 @@ const Login = () => {
     e.preventDefault();
     console.log({ email, password, remember });
   };
-
-
   
 
   return (
