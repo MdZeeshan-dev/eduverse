@@ -17,9 +17,11 @@ const Login = () => {
 
   return (
 
-    
+
     <>
       <Navbar authPage={true} />
+
+      
 
       <main className="h-[calc(100vh-64px)] bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center px-4">
         <div className="w-full max-w-3xl -translate-y-7 bg-white rounded-3xl shadow-xl overflow-hidden">
