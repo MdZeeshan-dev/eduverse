@@ -14,6 +14,9 @@ const Login = () => {
     console.log({ email, password, remember });
   };
 
+
+  
+
   return (
     <>
       <Navbar authPage={true} />
