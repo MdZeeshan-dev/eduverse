@@ -10,6 +10,8 @@ const Login = () => {
   const [remember, setRemember] = useState(false);
 
   const handleSubmit = (e) => {
+
+    
     e.preventDefault();
     console.log({ email, password, remember });
   };
