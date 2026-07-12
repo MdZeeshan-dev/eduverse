@@ -6,8 +6,6 @@ import Testimonials from "../components/home/Testimonials";
 import CTA from "../components/home/CTA";
 import Footer from "../components/common/Footer";
 
-
-
 const Home = () => {
   return (
     <>
