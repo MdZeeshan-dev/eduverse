@@ -15,8 +15,6 @@ const Login = () => {
   };
 
   return (
-
-    
     <>
       <Navbar authPage={true} />
 
