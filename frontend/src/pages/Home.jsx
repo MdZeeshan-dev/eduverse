@@ -14,10 +14,12 @@ const Home = () => {
   return (
     <>
 
-    
+
       <Hero />
       <FeaturedCourses />
       <Categories />
+
+      
       <TopInstructors />
       <Testimonials />
       <CTA />
