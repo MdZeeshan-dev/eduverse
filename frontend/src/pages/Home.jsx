@@ -7,8 +7,6 @@ import CTA from "../components/home/CTA";
 import Footer from "../components/common/Footer";
 
 
-
-
 const Home = () => {
   return (
     <>
