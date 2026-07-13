@@ -15,6 +15,8 @@ const Home = () => {
       <TopInstructors />
       <Testimonials />
       <CTA />
+
+      
       <Footer />
     </>
   );
