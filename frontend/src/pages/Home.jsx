@@ -11,6 +11,8 @@ const Home = () => {
     <>
       <Hero />
       <FeaturedCourses />
+
+      
       <Categories />
       <TopInstructors />
       <Testimonials />
