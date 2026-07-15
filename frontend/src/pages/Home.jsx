@@ -34,11 +34,3 @@ export default Home;
 
 
 
-
-
-
-
-
-
-
-
