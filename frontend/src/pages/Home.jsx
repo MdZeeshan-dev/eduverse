@@ -25,10 +25,3 @@ export default Home
 
 
 
-
-
-
-
-
-
-
