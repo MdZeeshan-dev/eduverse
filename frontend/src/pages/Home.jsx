@@ -29,9 +29,3 @@ export default Home
 
 
 
-
-
-
-
-
-
