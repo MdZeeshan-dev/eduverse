@@ -28,8 +28,3 @@ export default Home
 
 
 
-
-
-
-
-
