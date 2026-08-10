@@ -17,5 +17,3 @@ const SortDropdown = ({ sortBy, setSortBy }) => {
 };
 
 export default SortDropdown;
-
-
