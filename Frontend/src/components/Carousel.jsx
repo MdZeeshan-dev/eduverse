@@ -12,9 +12,6 @@ const Carousel = () => {
 
   const totalSlides = images.length;
 
-
-
-
   
 
   // Create a loop by adding first and last images as clones
