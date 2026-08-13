@@ -32,11 +32,12 @@ const Carousel = () => {
 
 
 
-    
+
     setCurrentIndex((prev) => prev - 1);
   };
 
   const nextSlide = () => {
+    
     setIsTransitioning(true);
     setCurrentIndex((prev) => prev + 1);
   };
