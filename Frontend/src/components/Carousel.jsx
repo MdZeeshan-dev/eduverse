@@ -20,9 +20,6 @@ const Carousel = () => {
   // Create a loop by adding first and last images as clones
   const slides = [
 
-
-
-
     
     images[totalSlides - 1], // Clone last image at the beginning
     ...images,
