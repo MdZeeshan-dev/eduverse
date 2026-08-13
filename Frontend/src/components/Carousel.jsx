@@ -7,6 +7,8 @@ const images = [
 ];
 
 const Carousel = () => {
+
+  
   const [currentIndex, setCurrentIndex] = useState(1); // Start from the first real image
   const [isTransitioning, setIsTransitioning] = useState(true);
 
