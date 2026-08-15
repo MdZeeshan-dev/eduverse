@@ -17,10 +17,13 @@ const Carousel = () => {
 
 
 
+
+    
+
     images[totalSlides - 1], // Clone last image at the beginning
 
 
-    
+
     ...images,
     images[0], // Clone first image at the end
   ];
