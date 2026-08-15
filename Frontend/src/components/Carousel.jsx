@@ -27,7 +27,7 @@ const Carousel = () => {
 
 
   ];
-
+  
 
   const prevSlide = () => {
     setIsTransitioning(true);
