@@ -22,6 +22,10 @@ const Carousel = () => {
 
     ...images,
     images[0], // Clone first image at the end
+
+
+
+    
   ];
 
   const prevSlide = () => {
