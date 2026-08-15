@@ -16,10 +16,6 @@ const Carousel = () => {
   const slides = [
 
 
-
-
-    
-
     images[totalSlides - 1], // Clone last image at the beginning
 
 
