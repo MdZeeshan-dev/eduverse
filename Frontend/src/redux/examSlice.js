@@ -512,3 +512,6 @@ const examSlice = createSlice({
 });
 
 export default examSlice.reducer;
+
+
+
