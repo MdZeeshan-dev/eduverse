@@ -105,7 +105,7 @@ export const deleteExam = createAsyncThunk(
   }
 );
 
-// ✅ Delete a Question (Only trainers or admin can delete)
+
 export const deleteQuestion = createAsyncThunk(
   "exam/deleteQuestion",
   async (questionId, { rejectWithValue }) => {
