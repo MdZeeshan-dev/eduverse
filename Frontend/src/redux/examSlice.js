@@ -61,7 +61,6 @@ export const createExam = createAsyncThunk(
   }
 );
 
-// ✅ Add Questions to an Exam (Only trainers can access)
 export const addQuestions = createAsyncThunk(
   "exam/addQuestions",
   async ({ examId, questions }, { rejectWithValue }) => {
@@ -85,7 +84,6 @@ export const addQuestions = createAsyncThunk(
   }
 );
 
-// ✅ Delete an Exam (Only trainers or admin can delete)
 export const deleteExam = createAsyncThunk(
   "exam/deleteExam",
   async (examId, { rejectWithValue }) => {
