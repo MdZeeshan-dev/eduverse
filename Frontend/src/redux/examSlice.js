@@ -197,12 +197,12 @@ export const submitResult = createAsyncThunk(
       if (!token) throw new Error("Unauthorized - No token");
 
       const response = await axios.post(
-        `${API_BASE_URL}/submit-result`, // ✅ Correct URL
+        `${API_BASE_URL}/submit-result`, 
         resultData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json", // ✅ Important
+            "Content-Type": "application/json", 
           },
         }
       );
