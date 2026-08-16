@@ -188,12 +188,12 @@ export const fetchEnrolledExams = createAsyncThunk(
     }
   }
 );
-// ✅ Submit Exam Result
+
 export const submitResult = createAsyncThunk(
   "exam/submitResult",
   async (resultData, { rejectWithValue }) => {
     try {
-      const token = getToken(); // ✅ Ensure token is fetched correctly
+      const token = getToken(); 
       if (!token) throw new Error("Unauthorized - No token");
 
       const response = await axios.post(
