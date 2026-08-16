@@ -14,13 +14,12 @@ const isTokenValid = (token) => {
   }
 };
 
-// ✅ Get token from cookies
 const getToken = () => {
   const token = Cookies.get("token");
   return token && isTokenValid(token) ? token.trim() : null;
 };
 
-// ✅ Fetch all exams (Accessible by trainers & examinees)
+
 export const fetchExams = createAsyncThunk(
   "exam/fetchExams",
   async (_, { rejectWithValue }) => {
