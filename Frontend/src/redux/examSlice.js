@@ -41,7 +41,7 @@ export const fetchExams = createAsyncThunk(
   }
 );
 
-// ✅ Create Exam (Only trainers can access)
+
 export const createExam = createAsyncThunk(
   "exam/createExam",
   async (examData, { rejectWithValue }) => {
