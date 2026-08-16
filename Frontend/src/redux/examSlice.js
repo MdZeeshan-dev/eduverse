@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import Cookies from "js-cookie"; // ✅ Import js-cookie
+import Cookies from "js-cookie"; 
 
 // Define the base API URL
 const API_BASE_URL = "https://http://localhost:5000/api/exams";
 
-// ✅ Function to check if the token is valid
 const isTokenValid = (token) => {
   try {
     const payload = JSON.parse(atob(token.split(".")[1])); // Decode JWT payload
