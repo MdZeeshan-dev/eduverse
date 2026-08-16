@@ -27,20 +27,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
 app.use("/public", express.static("public"));
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://learning-management-system-dglz.vercel.app",
+];
 
-app.use(cors({
-    origin: "https://learning-management-system-dglz.vercel.app", 
-    credentials: true,              
-    methods: ["GET", "POST", "PUT","PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-}));
-app.options("*", cors()); // Handle preflight requests globally
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://learning-management-system-dglz.vercel.app"); // Allow frontend
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Authorization, Content-Type");
-  next();
-});
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+app.options("*", cors());
 
 connectDB();
 
