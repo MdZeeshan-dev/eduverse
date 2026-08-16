@@ -129,8 +129,7 @@ export const deleteQuestion = createAsyncThunk(
     }
   }
 );
-// ✅ Fetch Questions for a Specific Exam (Trainers & Examinees)
-// ✅ Fetch a single exam's questions
+
 export const fetchExamQuestions = createAsyncThunk(
   "exam/fetchExamQuestions",
   async (examId, { rejectWithValue }) => {
