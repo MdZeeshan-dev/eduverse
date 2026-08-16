@@ -145,7 +145,7 @@ export const fetchExamQuestions = createAsyncThunk(
   }
 );
 
-// ✅ Enroll in an Exam (Learners & Examinees)
+
 export const enrollExam = createAsyncThunk(
   "exam/enrollExam",
   async (examId, { rejectWithValue }) => {
