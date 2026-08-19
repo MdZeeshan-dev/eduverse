@@ -8,19 +8,12 @@ function CourseCard({ image, category, heading, level, duration, link }) {
       <div className="bg-white min-h-80 shadow-lg overflow-hidden transition-all group-hover:shadow-2xl border-[1px] border-gray-300 p-4 group-hover:scale-105">
         {/* Course Image */}
         <div className="w-full overflow-hidden">
-       <img
-  src={image}
-  alt="Course"
-  onError={(e) => {
-    e.currentTarget.src = "https://placehold.co/600x300?text=Course";
-  }}
-  className="w-[300px] h-[150px] object-cover transform group-hover:scale-105 transition-all"
-/>
+          <img
+            src={image}
+            alt="Course"
+            className="w-[300px] h-[150px] object-cover transform group-hover:scale-105 transition-all"
+          />
         </div>
-
-
-
-        
 
         
         <div className="mt-4 space-y-2 flex flex-col">
