@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-
 const testimonialsData = [
   {
     id: 1,
@@ -9,8 +8,7 @@ const testimonialsData = [
     role: "Full Stack Developer",
     testimonial:
       "Brook's mentorship helped me level up my coding skills. The project-based learning approach is fantastic!",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPnE_fy9lLMRP5DLYLnGN0LRLzZOiEpMrU4g&s",
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
   },
   {
     id: 2,
@@ -18,8 +16,7 @@ const testimonialsData = [
     role: "Frontend Engineer",
     testimonial:
       "The React component series gave me the confidence to build complex UIs with ease. Highly recommended!",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAF9_aVW_JaNa6KU2-f0USKAhL1lPhuVxcng&s",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
   },
   {
     id: 3,
@@ -27,8 +24,7 @@ const testimonialsData = [
     role: "Backend Developer",
     testimonial:
       "Learning Node.js and Express was a breeze thanks to Brook's practical explanations.",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0krX0e-PY9YM7zNJ7i5iPPZxYHhg7NJ3yuA&s",
+    image: "https://randomuser.me/api/portraits/men/45.jpg",
   },
   {
     id: 4,
@@ -36,8 +32,7 @@ const testimonialsData = [
     role: "UI/UX Designer",
     testimonial:
       "I improved my design-to-code skills drastically by following the Tailwind CSS tutorials.",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSC4YpV2Wsenk9MEeoauZ1RLX_AFbdS1EhSg&s",
+    image: "https://randomuser.me/api/portraits/women/65.jpg",
   },
   {
     id: 5,
