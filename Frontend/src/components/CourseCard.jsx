@@ -18,6 +18,8 @@ function CourseCard({ image, category, heading, level, duration, link }) {
 />
         </div>
 
+
+
         
         <div className="mt-4 space-y-2 flex flex-col">
         
