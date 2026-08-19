@@ -21,6 +21,8 @@ function CourseCard({ image, category, heading, level, duration, link }) {
 
 
         
+
+        
         <div className="mt-4 space-y-2 flex flex-col">
         
           <span className="text-sm font-semibold uppercase text-blue-500">
