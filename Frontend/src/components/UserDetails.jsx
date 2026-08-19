@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserById } from "../redux/userSlice"; // Ensure this exists
-import { banUser, unbanUser } from "../redux/adminSlice"; // Import ban/unban actions
+import { fetchUserById } from "../redux/userSlice";
+import { banUser, unbanUser } from "../redux/adminSlice";
 import { useParams, useNavigate } from "react-router-dom";
 
 const UserDetails = () => {
@@ -9,7 +9,7 @@ const UserDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, loading, error } = useSelector((state) => state.users);
-  const { bannedUsers } = useSelector((state) => state.admin); // Track banned users
+  const { bannedUsers } = useSelector((state) => state.admin);
   const [actionLoading, setActionLoading] = useState(false);
 
   useEffect(() => {
@@ -21,21 +21,19 @@ const UserDetails = () => {
   const handleBanUser = async () => {
     setActionLoading(true);
     await dispatch(banUser(id)).unwrap();
-    await dispatch(fetchUserById(id)); // ✅ Ensure updated user state
+    await dispatch(fetchUserById(id));
     setActionLoading(false);
   };
-  
+
   const handleUnbanUser = async () => {
     setActionLoading(true);
     await dispatch(unbanUser(id)).unwrap();
-    await dispatch(fetchUserById(id)); // ✅ Ensure updated user state
+    await dispatch(fetchUserById(id));
     setActionLoading(false);
   };
-  
 
   return (
     <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-      {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
         className="mb-4 flex items-center text-gray-700 hover:text-gray-900 transition duration-200"
@@ -43,12 +41,13 @@ const UserDetails = () => {
         <span className="mr-2">←</span> Back
       </button>
 
-      {loading && <p className="text-center text-gray-600">Loading user details...</p>}
+      {loading && (
+        <p className="text-center text-gray-600">Loading user details...</p>
+      )}
       {error && <p className="text-center text-red-500">{error}</p>}
 
       {user && (
         <div className="text-center">
-          {/* Profile Picture */}
           <img
             src={user.profilePicture || "/default-avatar.png"}
             alt={user.fullName}
@@ -58,19 +57,29 @@ const UserDetails = () => {
           <h2 className="text-2xl font-bold mt-4">{user.fullName}</h2>
           <p className="text-gray-600 capitalize">{user.role}</p>
 
-          {/* Additional User Details */}
           <div className="mt-6 text-left space-y-2">
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Phone:</strong> {user.phoneNumber || "N/A"}</p>
-            <p><strong>Gender:</strong> {user.gender || "Not specified"}</p>
-            <p><strong>Date of Birth:</strong> {user.dateOfBirth ? new Date(user.dateOfBirth).toLocaleDateString() : "Not provided"}</p>
             <p>
-              <strong>Address:</strong> 
-              {user.address?.city || "N/A"}, {user.address?.state || "N/A"}, {user.address?.country || "N/A"}
+              <strong>Email:</strong> {user.email}
+            </p>
+            <p>
+              <strong>Phone:</strong> {user.phoneNumber || "N/A"}
+            </p>
+            <p>
+              <strong>Gender:</strong> {user.gender || "Not specified"}
+            </p>
+            <p>
+              <strong>Date of Birth:</strong>{" "}
+              {user.dateOfBirth
+                ? new Date(user.dateOfBirth).toLocaleDateString()
+                : "Not provided"}
+            </p>
+            <p>
+              <strong>Address:</strong>
+              {user.address?.city || "N/A"}, {user.address?.state || "N/A"},{" "}
+              {user.address?.country || "N/A"}
             </p>
           </div>
 
-          {/* Ban/Unban Buttons */}
           <div className="mt-6">
             {isBanned ? (
               <button

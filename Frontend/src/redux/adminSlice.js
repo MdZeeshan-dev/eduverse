@@ -1,47 +1,60 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// ✅ Fetch Admin Stats
 export const fetchAdminStats = createAsyncThunk(
   "admin/fetchStats",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get("https://http://localhost:5000/api/admin/stats", {
-        withCredentials: true,
-      });
+      const response = await axios.get(
+        "https://http://localhost:5000/api/admin/stats",
+        {
+          withCredentials: true,
+        },
+      );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Failed to fetch stats");
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch stats",
+      );
     }
-  }
+  },
 );
 
-// ✅ Ban User
 export const banUser = createAsyncThunk(
   "admin/banUser",
   async (userId, { rejectWithValue }) => {
     try {
-      await axios.put(`https://http://localhost:5000/api/admin/ban/${userId}`, {}, { withCredentials: true });
+      await axios.put(
+        `https://http://localhost:5000/api/admin/ban/${userId}`,
+        {},
+        { withCredentials: true },
+      );
       return userId; // Return only the ID to update state
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Failed to ban user");
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to ban user",
+      );
     }
-  }
+  },
 );
 
-// ✅ Unban User
 export const unbanUser = createAsyncThunk(
   "admin/unbanUser",
   async (userId, { rejectWithValue }) => {
     try {
-      await axios.put(`http://localhost:5000/api/admin/unban/${userId}"`, {}, { withCredentials: true });
-      return userId; // ✅ Return userId to update Redux state
+      await axios.put(
+        `http://localhost:5000/api/admin/unban/${userId}"`,
+        {},
+        { withCredentials: true },
+      );
+      return userId;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Failed to unban user");
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to unban user",
+      );
     }
-  }
+  },
 );
-
 
 const adminSlice = createSlice({
   name: "admin",
@@ -49,7 +62,7 @@ const adminSlice = createSlice({
     totalUsers: 0,
     totalCourses: 0,
     totalExams: 0,
-    bannedUsers: [], // ✅ New state to track banned users
+    bannedUsers: [],
     loading: false,
     error: null,
   },
@@ -57,7 +70,7 @@ const adminSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      // ✅ Fetch Admin Stats
+
       .addCase(fetchAdminStats.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -74,19 +87,19 @@ const adminSlice = createSlice({
         state.error = action.payload;
       })
 
-      // ✅ Ban User (Update State Immediately)
       .addCase(banUser.fulfilled, (state, action) => {
         if (!state.bannedUsers.includes(action.payload)) {
-          state.bannedUsers.push(action.payload); // ✅ Add to banned list
+          state.bannedUsers.push(action.payload);
         }
       })
       .addCase(banUser.rejected, (state, action) => {
         state.error = action.payload;
       })
 
-      // ✅ Unban User (Update State Immediately)
       .addCase(unbanUser.fulfilled, (state, action) => {
-        state.bannedUsers = state.bannedUsers.filter((id) => id !== action.payload); // ✅ Remove from banned list
+        state.bannedUsers = state.bannedUsers.filter(
+          (id) => id !== action.payload,
+        );
       })
       .addCase(unbanUser.rejected, (state, action) => {
         state.error = action.payload;

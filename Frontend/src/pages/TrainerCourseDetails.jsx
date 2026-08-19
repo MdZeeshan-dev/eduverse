@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCourseById, getEnrolledCourses, deleteCourse } from "../redux/courseSlice";
+import {
+  fetchCourseById,
+  getEnrolledCourses,
+  deleteCourse,
+} from "../redux/courseSlice";
 import UpdateCourseModal from "./UpdateCourseModal";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 
 const CourseDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { selectedCourse, loading, error, enrolledCourses } = useSelector(state => state.courses);
+  const { selectedCourse, loading, error, enrolledCourses } = useSelector(
+    (state) => state.courses,
+  );
   const token = useSelector((state) => state.auth.token);
   const [showLessons, setShowLessons] = useState(false);
   const [expandedSyllabusIndex, setExpandedSyllabusIndex] = useState(null);
@@ -17,10 +23,11 @@ const CourseDetails = () => {
 
   useEffect(() => {
     if (id) dispatch(fetchCourseById(id));
-    if (token) dispatch(getEnrolledCourses());  // Fetch enrolled courses
+    if (token) dispatch(getEnrolledCourses());
   }, [dispatch, id, token]);
 
-  if (loading) return <p className="text-center text-lg">Loading course details...</p>;
+  if (loading)
+    return <p className="text-center text-lg">Loading course details...</p>;
   if (error) return <p className="text-red-500 text-center">{error}</p>;
   if (!selectedCourse) return <p className="text-center">Course not found.</p>;
 
@@ -32,24 +39,23 @@ const CourseDetails = () => {
     setExpandedSyllabusIndex(expandedSyllabusIndex === index ? null : index);
   };
 
-
   const handleDeleteCourse = () => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this course?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this course?",
+    );
     if (confirmDelete) {
       dispatch(deleteCourse(id)).then(() => {
         toast.success("Course deleted successfully!");
-        navigate("/courses"); // Redirect to courses list after deletion
+        navigate("/courses");
       });
     }
   };
   return (
     <div className="max-w-full mx-auto mt-2 text-white">
-
-
-      {/* Header Section */}
-      <div className="grid grid-cols-1 text-white md:grid-cols-5 gap-5 p-6 bg-white shadow-lg border border-gray-200 bg-gradient-to-r from-blue-700 to-blue-500
-">
-        {/* Course Information */}
+      <div
+        className="grid grid-cols-1 text-white md:grid-cols-5 gap-5 p-6 bg-white shadow-lg border border-gray-200 bg-gradient-to-r from-blue-700 to-blue-500
+"
+      >
         <div className="col-span-1 md:col-span-3 mt-2 md:mt-0">
           <h1 className="text-2xl md:text-3xl font-bold ">
             {selectedCourse.title}
@@ -58,7 +64,6 @@ const CourseDetails = () => {
             {selectedCourse.description}
           </p>
 
-          {/* Additional Details */}
           <div className="flex items-center gap-4 text-sm mt-3">
             <p>
               <strong>Category:</strong> {selectedCourse.category}
@@ -68,40 +73,40 @@ const CourseDetails = () => {
               {selectedCourse.certificationAvailable ? "Yes" : "No"}
             </p>
             <p>
-              <strong>Duration: </strong>{selectedCourse.duration} Hrs
+              <strong>Duration: </strong>
+              {selectedCourse.duration} Hrs
             </p>
-            <p> <strong>Level: </strong> {selectedCourse.level || "Beginner"}</p>
+            <p>
+              {" "}
+              <strong>Level: </strong> {selectedCourse.level || "Beginner"}
+            </p>
           </div>
 
-          {/* Prerequisites */}
           {selectedCourse.prerequisites && (
             <p className="text-sm mt-3">
               <strong>Prerequisites:</strong> {selectedCourse.prerequisites}
             </p>
           )}
 
-          {/* Pricing and Enrollment */}
           <div className="mt-4">
-            <div className="text-lg font-bold text-white">₹{selectedCourse.price || "449"}</div>
-
+            <div className="text-lg font-bold text-white">
+              ₹{selectedCourse.price || "449"}
+            </div>
           </div>
         </div>
 
-
-        {/* Course Thumbnail on the Right Side */}
         <div className="col-span-1 md:col-span-2 relative w-full h-52 md:h-60 bg-gray-300 rounded-lg overflow-hidden shadow-lg">
           <img
-            src={selectedCourse.thumbnail || "https://via.placeholder.com/800x400"}
+            src={
+              selectedCourse.thumbnail || "https://via.placeholder.com/800x400"
+            }
             alt={selectedCourse.title}
             className="w-full h-full object-cover"
           />
         </div>
       </div>
 
-
-      {/* Show Lessons Button */}
       <div className="mt-6 mx-6">
-
         <button
           onClick={handleToggleLessons}
           className="bg-blue-600 text-white font-bold px-4 py-2 hover:bg-blue-700 transition-all"
@@ -111,8 +116,6 @@ const CourseDetails = () => {
 
         {showLessons && (
           <div className="mt-8 text-black">
-            {/* Course Lessons Heading */}
-
             <h2 className="text-3xl font-bold">Lessons</h2>
 
             {selectedCourse?.lessons?.length > 0 ? (
@@ -122,28 +125,24 @@ const CourseDetails = () => {
                     key={lesson._id}
                     className="border border-blue-200 rounded-lg bg-white shadow-md hover:shadow-lg transition-all duration-300"
                   >
-                    {/* Lesson Header */}
                     <div className="p-4 bg-gradient-to-r from-blue-700 to-blue-500 ">
                       <h4 className="text-lg font-semibold text-white">
                         Lesson {index + 1}: {lesson.title}
                       </h4>
                     </div>
 
-                    {/* Lesson Content in Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-4 p-4 items-center">
-
-
-                      {/* Lesson Info on the Right Side */}
                       <div className="col-span-1 md:col-span-2 flex flex-col justify-center">
                         <h4 className="text-xl font-semibold text-gray-900 mb-2">
                           {lesson.title}
                         </h4>
                         {lesson.description && (
-                          <p className="text-gray-600 text-base">{lesson.description}</p>
+                          <p className="text-gray-600 text-base">
+                            {lesson.description}
+                          </p>
                         )}
                       </div>
 
-                      {/* Video Player on the Left Side (Larger Size) */}
                       <div className="col-span-1 md:col-span-3 flex justify-center items-center">
                         <video
                           src={lesson.videoUrl}
@@ -151,8 +150,6 @@ const CourseDetails = () => {
                           className="w-full md:w-[95%] h-auto max-w-[800px] rounded-md shadow-md"
                         />
                       </div>
-
-
                     </div>
                   </div>
                 ))}
@@ -162,16 +159,10 @@ const CourseDetails = () => {
                 🚫 No lessons available for this course.
               </p>
             )}
-
-
           </div>
         )}
-
-
-
       </div>
 
-      {/* Syllabus Section */}
       <div className="mt-8 mx-6">
         <h3 className="text-3xl font-bold mb-5 text-gray-900">Syllabus</h3>
         <div className="space-y-4">
@@ -187,7 +178,9 @@ const CourseDetails = () => {
                 >
                   <span className="text-gray-900">{module.title}</span>
                   <div className="flex items-center space-x-2">
-                    <span className="text-gray-600 text-sm">Module Details</span>
+                    <span className="text-gray-600 text-sm">
+                      Module Details
+                    </span>
                     <span className="text-gray-600">
                       {expandedSyllabusIndex === index ? "▲" : "▼"}
                     </span>
@@ -208,17 +201,26 @@ const CourseDetails = () => {
         </div>
       </div>
 
-
       <div className="mt-6 mx-6 my-10">
-        <button onClick={() => setIsUpdateModalOpen(true)} className="bg-blue-700 text-white px-4 py-2  hover:bg-blue-800 mr-5">
+        <button
+          onClick={() => setIsUpdateModalOpen(true)}
+          className="bg-blue-700 text-white px-4 py-2  hover:bg-blue-800 mr-5"
+        >
           Edit Course
         </button>
 
-        <button onClick={handleDeleteCourse} className="bg-blue-700 text-white px-4 py-2  hover:bg-blue-800 ">
+        <button
+          onClick={handleDeleteCourse}
+          className="bg-blue-700 text-white px-4 py-2  hover:bg-blue-800 "
+        >
           Delete Course
         </button>
       </div>
-      <UpdateCourseModal course={selectedCourse} isOpen={isUpdateModalOpen} onClose={() => setIsUpdateModalOpen(false)} />
+      <UpdateCourseModal
+        course={selectedCourse}
+        isOpen={isUpdateModalOpen}
+        onClose={() => setIsUpdateModalOpen(false)}
+      />
     </div>
   );
 };

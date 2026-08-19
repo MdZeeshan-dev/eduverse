@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Contact = require('../models/Contact'); // We'll create this model next
+const Contact = require('../models/Contact');
 
-// Submit contact form
 router.post('/contact', async (req, res) => {
   const { name, email, message } = req.body;
 

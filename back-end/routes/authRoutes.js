@@ -1,5 +1,5 @@
 const express = require("express");
-const { uploadSingle } = require("../middlewares/multerConfig"); // ✅ Import single file upload
+const { uploadSingle } = require("../middlewares/multerConfig"); 
 const { registerUser, loginUser, changePassword } = require("../controllers/authController");
 const protect = require("../middlewares/authMiddleware");
 

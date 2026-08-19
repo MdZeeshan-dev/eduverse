@@ -5,25 +5,25 @@ import Cookies from "js-cookie";
 // Base API URL
 const API_URL = "http://localhost:5000";
 
-// ✅ Fetch all users (Admin only)
 export const fetchAllUsers = createAsyncThunk(
   "users/fetchAllUsers",
   async (_, { rejectWithValue }) => {
     try {
-      const token = Cookies.get("token"); 
+      const token = Cookies.get("token");
       if (!token) return rejectWithValue("No authentication token found.");
 
       const response = await axios.get(API_URL, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Failed to fetch users.");
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch users.",
+      );
     }
-  }
+  },
 );
 
-// ✅ Fetch user by ID
 export const fetchUserById = createAsyncThunk(
   "users/fetchUserById",
   async (_id, { rejectWithValue }) => {
@@ -37,16 +37,16 @@ export const fetchUserById = createAsyncThunk(
 
       return {
         ...response.data,
-        isBanned: response.data.isBanned || false, // ✅ Ensure `isBanned` exists
+        isBanned: response.data.isBanned || false,
       };
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Failed to fetch user.");
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch user.",
+      );
     }
-  }
+  },
 );
 
-
-// ✅ Fetch current logged-in user
 export const fetchCurrentUser = createAsyncThunk(
   "users/fetchCurrentUser",
   async (_, { rejectWithValue }) => {
@@ -55,16 +55,17 @@ export const fetchCurrentUser = createAsyncThunk(
       if (!token) return rejectWithValue("No authentication token found.");
 
       const response = await axios.get(`${API_URL}/me`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Failed to fetch current user.");
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch current user.",
+      );
     }
-  }
+  },
 );
 
-// ✅ Update user profile (Handles Profile Picture Upload)
 export const updateUser = createAsyncThunk(
   "users/updateUser",
   async ({ id, updates, profilePicture }, { rejectWithValue }) => {
@@ -76,7 +77,6 @@ export const updateUser = createAsyncThunk(
       const headers = { Authorization: `Bearer ${token}` };
 
       if (profilePicture) {
-        // Handle file upload (multipart/form-data)
         formData = new FormData();
         for (const key in updates) {
           formData.append(key, updates[key]);
@@ -88,18 +88,19 @@ export const updateUser = createAsyncThunk(
 
       const response = await axios.put(
         `${API_URL}/${id}`,
-        profilePicture ? formData : updates, // Use formData for file upload, JSON otherwise
-        { headers }
+        profilePicture ? formData : updates,
+        { headers },
       );
 
-      return response.data.user; // Return updated user data
+      return response.data.user;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Failed to update user.");
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to update user.",
+      );
     }
-  }
+  },
 );
 
-// ✅ Redux Slice
 const storedUser = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
 const storedToken = Cookies.get("token") || null;
 
@@ -108,10 +109,10 @@ const userSlice = createSlice({
   initialState: {
     users: [],
     user: null,
-    currentUser: storedUser, // ✅ Use stored user from cookies
-    token: storedToken, // ✅ Use stored token from cookies
+    currentUser: storedUser,
+    token: storedToken,
     loading: false,
-    error: null
+    error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -161,13 +162,13 @@ const userSlice = createSlice({
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.currentUser = action.payload; // ✅ Update current user data
+        state.currentUser = action.payload;
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
-  }
+  },
 });
 
 export default userSlice.reducer;

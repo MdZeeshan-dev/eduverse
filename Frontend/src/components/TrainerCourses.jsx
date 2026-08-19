@@ -22,17 +22,17 @@ const TrainerCourses = () => {
         ← Back
       </button>
       <div className="max-w-6xl mx-auto">
-        {/* Page Title */}
+     
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Your Created Courses</h2>
 
-        {/* Loading & Error Handling */}
+       
         {loading && <p className="text-center text-gray-600">Loading your courses...</p>}
         {error && <p className="text-center text-red-500">{error}</p>}
         {trainerCourses.length === 0 && !loading && !error && (
           <p className="text-center text-gray-600">No courses found.</p>
         )}
 
-        {/* Courses Grid */}
+      
         {!loading && !error && trainerCourses.length > 0 && (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {trainerCourses.map((course) => (

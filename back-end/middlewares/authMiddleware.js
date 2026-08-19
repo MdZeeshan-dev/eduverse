@@ -9,16 +9,16 @@ const protect = (roles = []) => {
         }
 
         try {
-            // ✅ Verify Token
+      
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             req.user = decoded;
 
-            // ✅ Role-Based Access Control
+           
             if (roles.length && !roles.includes(decoded.role)) {
                 return res.status(403).json({ message: "Forbidden: You do not have access." });
             }
 
-            // ✅ CRUCIAL PART: Move to Next Middleware (Multer)
+       
             next();
         } catch (error) {
             res.status(401).json({ message: "Invalid token" });

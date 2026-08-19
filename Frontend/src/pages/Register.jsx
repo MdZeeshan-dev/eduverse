@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, resetAuthState, loginUser } from "../redux/authSlice";
 import { motion, AnimatePresence } from "framer-motion";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 
 function Register({ isOpen, onClose, onLoginClick }) {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ function Register({ isOpen, onClose, onLoginClick }) {
     username: "",
     email: "",
     password: "",
-    role: "learner", // Default role
+    role: "learner",
     phoneNumber: "",
     gender: "",
     dateOfBirth: "",
@@ -41,8 +41,10 @@ function Register({ isOpen, onClose, onLoginClick }) {
   useEffect(() => {
     if (success) {
       toast.success("User Registered successfully!");
-      // Auto-login after successful registration
-      dispatch(loginUser({ email: formData.email, password: formData.password }));
+
+      dispatch(
+        loginUser({ email: formData.email, password: formData.password }),
+      );
       onClose();
       dispatch(resetAuthState());
     }
@@ -68,13 +70,16 @@ function Register({ isOpen, onClose, onLoginClick }) {
       formData.append("upload_preset", "my_preset");
 
       try {
-        const res = await fetch("https://api.cloudinary.com/v1_1/drhk6uycr/image/upload", {
-          method: "POST",
-          body: formData,
-        });
+        const res = await fetch(
+          "https://api.cloudinary.com/v1_1/drhk6uycr/image/upload",
+          {
+            method: "POST",
+            body: formData,
+          },
+        );
 
         const data = await res.json();
-        setFormData((prev) => ({ ...prev, profilePicture: data.secure_url })); // Cloudinary image URL
+        setFormData((prev) => ({ ...prev, profilePicture: data.secure_url }));
         setImagePreview(data.secure_url);
       } catch (error) {
         console.error("Image upload error:", error);
@@ -82,10 +87,9 @@ function Register({ isOpen, onClose, onLoginClick }) {
     }
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(registerUser(formData))
+    dispatch(registerUser(formData));
   };
 
   return (
@@ -117,13 +121,8 @@ function Register({ isOpen, onClose, onLoginClick }) {
             {error && <p className="text-red-500">{error.message}</p>}
 
             <form onSubmit={handleSubmit}>
-              {(
+              {
                 <>
-                  
-
-                  {/* Full Name */}
-                  
-                  {/* Username */}
                   <div className="mb-3">
                     <label className="block text-sm font-medium">
                       Username
@@ -139,7 +138,6 @@ function Register({ isOpen, onClose, onLoginClick }) {
                     />
                   </div>
 
-                  {/* Role Selection */}
                   <div className="mb-3">
                     <label className="block text-sm font-medium">Role</label>
                     <select
@@ -155,8 +153,6 @@ function Register({ isOpen, onClose, onLoginClick }) {
                     </select>
                   </div>
 
-
-                  {/* Email */}
                   <div className="mb-3">
                     <label className="block text-sm font-medium">Email</label>
                     <input
@@ -170,7 +166,6 @@ function Register({ isOpen, onClose, onLoginClick }) {
                     />
                   </div>
 
-                  {/* Password */}
                   <div className="mb-3">
                     <label className="block text-sm font-medium">
                       Password
@@ -194,10 +189,8 @@ function Register({ isOpen, onClose, onLoginClick }) {
                       {loading ? "Registering..." : "Register"}
                     </button>
                   </div>
-
-
                 </>
-              )}
+              }
             </form>
 
             <p className="text-center text-sm mt-3">

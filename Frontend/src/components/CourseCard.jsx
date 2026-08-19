@@ -15,17 +15,17 @@ function CourseCard({ image, category, heading, level, duration, link }) {
           />
         </div>
 
-        {/* Course Info */}
+        
         <div className="mt-4 space-y-2 flex flex-col">
-          {/* Category */}
+        
           <span className="text-sm font-semibold uppercase text-blue-500">
             {category}
           </span>
 
-          {/* Title */}
+      
           <h2 className="text-lg font-bold text-gray-900 h-16">{heading}</h2>
 
-          {/* Level & Duration */}
+          
           <div className="flex items-center justify-between text-gray-600 text-sm justify-self-end">
             <span className="flex items-center">
               🏅 {level}

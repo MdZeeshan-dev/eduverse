@@ -11,7 +11,6 @@ import userImage from "/user.png";
 import { toast } from "react-toastify";
 import useNetworkStatus from "../hooks/useNetworkStatus";
 
-
 function Navbar() {
   const [modalType, setModalType] = useState(null);
   const dispatch = useDispatch();
@@ -61,7 +60,6 @@ function Navbar() {
     }
   }, [isOnline]);
 
-
   return (
     <>
       <header className="w-full fixed z-50 bg-white shadow-md">
@@ -71,20 +69,30 @@ function Navbar() {
             <img className="w-28" src={devdojo} alt="Logo" />
           </Link>
 
-          {/* Mobile Menu Icon */}
-          <button className="md:hidden text-2xl text-gray-700" onClick={() => setMenuOpen(!menuOpen)}>
+          <button
+            className="md:hidden text-2xl text-gray-700"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
             {menuOpen ? <FaTimes /> : <FaBars />}
           </button>
 
-          {/* Desktop Menu */}
           <nav className="hidden md:flex items-center gap-6 text-sm">
-            <Link to="/courses" className="hover:text-blue-600 transition-all font-medium">Courses</Link>
+            <Link
+              to="/courses"
+              className="hover:text-blue-600 transition-all font-medium"
+            >
+              Courses
+            </Link>
 
             {user && (
-              <Link to="/exams" className="hover:text-blue-600 transition-all font-medium">Exams</Link>
+              <Link
+                to="/exams"
+                className="hover:text-blue-600 transition-all font-medium"
+              >
+                Exams
+              </Link>
             )}
 
-            {/* Search Bar */}
             <input
               type="text"
               placeholder="Search for courses..."
@@ -94,7 +102,6 @@ function Navbar() {
               className="px-3 py-2 w-80 rounded-md border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500 transition-all"
             />
 
-            {/* Auth/Dropdown */}
             {user && currentUser ? (
               <div className="relative">
                 <button
@@ -146,15 +153,22 @@ function Navbar() {
           </nav>
         </div>
 
-        {/* Mobile Menu */}
         {menuOpen && (
           <div className="md:hidden flex flex-col items-center py-4 gap-4 bg-white shadow-lg z-40">
-            <Link to="/courses" className="text-lg font-medium hover:text-blue-600" onClick={() => setMenuOpen(false)}>
+            <Link
+              to="/courses"
+              className="text-lg font-medium hover:text-blue-600"
+              onClick={() => setMenuOpen(false)}
+            >
               Courses
             </Link>
 
             {user && (
-              <Link to="/exams" className="text-lg font-medium hover:text-blue-600" onClick={() => setMenuOpen(false)}>
+              <Link
+                to="/exams"
+                className="text-lg font-medium hover:text-blue-600"
+                onClick={() => setMenuOpen(false)}
+              >
                 Exams
               </Link>
             )}
@@ -170,10 +184,17 @@ function Navbar() {
 
             {user ? (
               <>
-                <Link to="/profile" className="text-lg font-medium hover:text-blue-600" onClick={() => setMenuOpen(false)}>
+                <Link
+                  to="/profile"
+                  className="text-lg font-medium hover:text-blue-600"
+                  onClick={() => setMenuOpen(false)}
+                >
                   Profile
                 </Link>
-                <button className="text-red-500 font-medium hover:text-red-700" onClick={handleLogout}>
+                <button
+                  className="text-red-500 font-medium hover:text-red-700"
+                  onClick={handleLogout}
+                >
                   Logout
                 </button>
               </>
@@ -200,12 +221,18 @@ function Navbar() {
             ⚠️ You are currently offline
           </div>
         )}
-
       </header>
 
-      {/* Login & Register Modals */}
-      {modalType === "login" && <Login isOpen={true} onClose={closeModal} onRegisterClick={openRegister} />}
-      {modalType === "register" && <Register isOpen={true} onClose={closeModal} onLoginClick={openLogin} />}
+      {modalType === "login" && (
+        <Login
+          isOpen={true}
+          onClose={closeModal}
+          onRegisterClick={openRegister}
+        />
+      )}
+      {modalType === "register" && (
+        <Register isOpen={true} onClose={closeModal} onLoginClick={openLogin} />
+      )}
     </>
   );
 }

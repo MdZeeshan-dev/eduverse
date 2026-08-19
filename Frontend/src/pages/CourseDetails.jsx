@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCourseById, enrollCourse, getEnrolledCourses } from "../redux/courseSlice";
+import {
+  fetchCourseById,
+  enrollCourse,
+  getEnrolledCourses,
+} from "../redux/courseSlice";
 
 const CourseDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { selectedCourse, loading, error, enrolledCourses } = useSelector(state => state.courses);
+  const { selectedCourse, loading, error, enrolledCourses } = useSelector(
+    (state) => state.courses,
+  );
   const token = useSelector((state) => state.auth.token);
   const [showLessons, setShowLessons] = useState(false);
   const [expandedSyllabusIndex, setExpandedSyllabusIndex] = useState(null);
 
   useEffect(() => {
     if (id) dispatch(fetchCourseById(id));
-    if (token) dispatch(getEnrolledCourses());  // Fetch enrolled courses
+    if (token) dispatch(getEnrolledCourses());
   }, [dispatch, id, token]);
 
-  if (loading) return <p className="text-center text-lg">Loading course details...</p>;
+  if (loading)
+    return <p className="text-center text-lg">Loading course details...</p>;
   if (error) return <p className="text-red-500 text-center">{error}</p>;
   if (!selectedCourse) return <p className="text-center">Course not found.</p>;
 
@@ -29,7 +36,9 @@ const CourseDetails = () => {
     setExpandedSyllabusIndex(expandedSyllabusIndex === index ? null : index);
   };
 
-  const isAlreadyEnrolled = enrolledCourses?.some(course => course._id === selectedCourse._id);
+  const isAlreadyEnrolled = enrolledCourses?.some(
+    (course) => course._id === selectedCourse._id,
+  );
 
   const handleEnroll = async () => {
     if (!token) {
@@ -45,27 +54,18 @@ const CourseDetails = () => {
     try {
       await dispatch(enrollCourse(selectedCourse._id)).unwrap();
 
-      // ✅ Immediately update Redux state without needing a refresh
       dispatch(getEnrolledCourses());
     } catch (err) {
       console.error("Enrollment failed:", err);
     }
   };
 
-
   return (
     <div className="max-w-full mx-auto mt-2 text-white">
-      {/* <button
-      onClick={() => navigate(-1)}
-      className="mb-2 mx-6 px-4 py-1 bg-gray-800 text-white hover:bg-gray-700 rounded transition"
-    >
-      ← Back
-    </button> */}
-
-      {/* Header Section */}
-      <div className="grid grid-cols-1 text-white md:grid-cols-5 gap-5 p-6 bg-white shadow-lg border border-gray-200 bg-gradient-to-r from-blue-700 to-blue-500
-">
-        {/* Course Information */}
+      <div
+        className="grid grid-cols-1 text-white md:grid-cols-5 gap-5 p-6 bg-white shadow-lg border border-gray-200 bg-gradient-to-r from-blue-700 to-blue-500
+"
+      >
         <div className="col-span-1 md:col-span-3 mt-2 md:mt-0">
           <h1 className="text-2xl md:text-3xl font-bold ">
             {selectedCourse.title}
@@ -74,7 +74,6 @@ const CourseDetails = () => {
             {selectedCourse.description}
           </p>
 
-          {/* Additional Details */}
           <div className="flex items-center gap-4 text-sm mt-3">
             <p>
               <strong>Category:</strong> {selectedCourse.category}
@@ -84,21 +83,25 @@ const CourseDetails = () => {
               {selectedCourse.certificationAvailable ? "Yes" : "No"}
             </p>
             <p>
-              <strong>Duration: </strong>{selectedCourse.duration} Hrs
+              <strong>Duration: </strong>
+              {selectedCourse.duration} Hrs
             </p>
-            <p> <strong>Level: </strong> {selectedCourse.level || "Beginner"}</p>
+            <p>
+              {" "}
+              <strong>Level: </strong> {selectedCourse.level || "Beginner"}
+            </p>
           </div>
 
-          {/* Prerequisites */}
           {selectedCourse.prerequisites && (
             <p className="text-sm mt-3">
               <strong>Prerequisites:</strong> {selectedCourse.prerequisites}
             </p>
           )}
 
-          {/* Pricing and Enrollment */}
           <div className="mt-4">
-            <div className="text-lg font-bold text-white">₹{selectedCourse.price || "449"}</div>
+            <div className="text-lg font-bold text-white">
+              ₹{selectedCourse.price || "449"}
+            </div>
             {isAlreadyEnrolled ? (
               <button className="bg-white text-blue-700 px-5 py-2 mt-2 font-bold border-2 border-white hover:bg-blue-500 hover:text-white cursor-not-allowed">
                 Already Enrolled
@@ -115,21 +118,18 @@ const CourseDetails = () => {
           </div>
         </div>
 
-
-        {/* Course Thumbnail on the Right Side */}
         <div className="col-span-1 md:col-span-2 relative w-full h-52 md:h-60 bg-gray-300 rounded-lg overflow-hidden shadow-lg">
           <img
-            src={selectedCourse.thumbnail || "https://via.placeholder.com/800x400"}
+            src={
+              selectedCourse.thumbnail || "https://via.placeholder.com/800x400"
+            }
             alt={selectedCourse.title}
             className="w-full h-full object-cover"
           />
         </div>
       </div>
 
-
-      {/* Show Lessons Button */}
       <div className="mt-6 mx-6">
-
         <button
           onClick={handleToggleLessons}
           className="bg-blue-600 text-white font-bold px-4 py-2 hover:bg-blue-700 transition-all"
@@ -139,8 +139,6 @@ const CourseDetails = () => {
 
         {showLessons && (
           <div className="mt-8 text-black">
-            {/* Course Lessons Heading */}
-
             <h2 className="text-3xl font-bold">Lessons</h2>
 
             {selectedCourse?.lessons?.length > 0 ? (
@@ -154,29 +152,29 @@ const CourseDetails = () => {
                       key={lesson._id}
                       className="border border-blue-200 rounded-lg bg-white shadow-md hover:shadow-lg transition-all duration-300"
                     >
-                      {/* Lesson Header */}
                       <div className="p-4 bg-gradient-to-r from-blue-700 to-blue-500">
                         <h4 className="text-lg font-semibold text-white">
                           Lesson {index + 1}: {lesson.title}
                           {isSample && !isAlreadyEnrolled && (
-                            <span className="ml-2 text-sm bg-yellow-300 text-black px-2 py-1 rounded-full">Sample</span>
+                            <span className="ml-2 text-sm bg-yellow-300 text-black px-2 py-1 rounded-full">
+                              Sample
+                            </span>
                           )}
                         </h4>
                       </div>
 
-                      {/* Lesson Content */}
                       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 p-4 items-center">
-                        {/* Lesson Info */}
                         <div className="col-span-1 md:col-span-2 flex flex-col justify-center">
                           <h4 className="text-xl font-semibold text-gray-900 mb-2">
                             {lesson.title}
                           </h4>
                           {lesson.description && (
-                            <p className="text-gray-600 text-base">{lesson.description}</p>
+                            <p className="text-gray-600 text-base">
+                              {lesson.description}
+                            </p>
                           )}
                         </div>
 
-                        {/* Video Section */}
                         <div className="col-span-1 md:col-span-3 flex justify-center items-center">
                           {canAccess ? (
                             <video
@@ -200,16 +198,10 @@ const CourseDetails = () => {
                 🚫 No lessons available for this course.
               </p>
             )}
-
-
           </div>
         )}
-
-
-
       </div>
 
-      {/* Syllabus Section */}
       <div className="mt-8 mx-6">
         <h3 className="text-3xl font-bold mb-5 text-gray-900">Syllabus</h3>
         <div className="space-y-4">
@@ -225,7 +217,9 @@ const CourseDetails = () => {
                 >
                   <span className="text-gray-900">{module.title}</span>
                   <div className="flex items-center space-x-2">
-                    <span className="text-gray-600 text-sm">Module Details</span>
+                    <span className="text-gray-600 text-sm">
+                      Module Details
+                    </span>
                     <span className="text-gray-600">
                       {expandedSyllabusIndex === index ? "▲" : "▼"}
                     </span>
@@ -246,7 +240,6 @@ const CourseDetails = () => {
         </div>
       </div>
     </div>
-
   );
 };
 

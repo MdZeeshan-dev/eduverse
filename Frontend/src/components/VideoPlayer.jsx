@@ -37,12 +37,19 @@ const VideoPlayer = ({ src, title }) => {
     <div className="w-full max-w-lg bg-gray-900 p-4 rounded-lg shadow-lg text-white">
       <h3 className="text-lg font-semibold mb-2">{title}</h3>
       <div className="relative">
-        <video ref={videoRef} src={src} className="w-full h-60 rounded-lg" controls />
+        <video
+          ref={videoRef}
+          src={src}
+          className="w-full h-60 rounded-lg"
+          controls
+        />
       </div>
 
-      {/* Controls */}
       <div className="flex justify-between items-center mt-3">
-        <button onClick={togglePlay} className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700">
+        <button
+          onClick={togglePlay}
+          className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700"
+        >
           {playing ? "Pause" : "Play"}
         </button>
 
@@ -61,7 +68,11 @@ const VideoPlayer = ({ src, title }) => {
 
         <label className="text-sm">
           Speed:
-          <select value={speed} onChange={handleSpeedChange} className="ml-2 px-2 py-1 bg-gray-700">
+          <select
+            value={speed}
+            onChange={handleSpeedChange}
+            className="ml-2 px-2 py-1 bg-gray-700"
+          >
             <option value="0.5">0.5x</option>
             <option value="1">1x</option>
             <option value="1.5">1.5x</option>
@@ -69,7 +80,10 @@ const VideoPlayer = ({ src, title }) => {
           </select>
         </label>
 
-        <button onClick={handleFullscreen} className="px-4 py-2 bg-green-600 rounded hover:bg-green-700">
+        <button
+          onClick={handleFullscreen}
+          className="px-4 py-2 bg-green-600 rounded hover:bg-green-700"
+        >
           Fullscreen
         </button>
       </div>

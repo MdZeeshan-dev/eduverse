@@ -5,18 +5,17 @@ import {
   updateExam,
   updateQuestion,
   addQuestions,
-} from "../redux/examSlice"; // Update paths if necessary
+} from "../redux/examSlice";
 import { useParams, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 
 const EditExamPage = () => {
-  const { examId } = useParams(); // Get exam ID from URL
+  const { examId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { exams, loading, error } = useSelector((state) => state.exam);
 
-  // ✅ State for exam details
   const [examData, setExamData] = useState({
     title: "",
     code: "",
@@ -28,10 +27,8 @@ const EditExamPage = () => {
     type: "Practice Test",
   });
 
-  // ✅ State for questions
   const [questions, setQuestions] = useState([]);
 
-  // ✅ Fetch exam and questions on load
   useEffect(() => {
     if (!exams.length) {
       dispatch(fetchExams());
@@ -42,26 +39,23 @@ const EditExamPage = () => {
           title: selectedExam.title || "",
           duration: selectedExam.duration || 0,
           description: selectedExam.description || "",
-          code: selectedExam.code|| "",
+          code: selectedExam.code || "",
           subject: selectedExam.subject || "",
           category: selectedExam.category || "",
           timeLimit: selectedExam.timeLimit || "",
           numQuestions: selectedExam.numQuestions || "",
           totalMarks: selectedExam.totalMarks || "",
-          type:selectedExam.type || "Practice Test",
+          type: selectedExam.type || "Practice Test",
         });
         setQuestions(selectedExam.questions || []);
       }
     }
   }, [dispatch, exams, examId]);
-  
 
-  // ✅ Handle input changes for exam
   const handleExamChange = (e) => {
     setExamData({ ...examData, [e.target.name]: e.target.value });
   };
 
-  // ✅ Handle question input changes
   const handleQuestionChange = (index, field, value) => {
     const updatedQuestions = [...questions];
     updatedQuestions[index] = {
@@ -70,10 +64,7 @@ const EditExamPage = () => {
     };
     setQuestions(updatedQuestions);
   };
-  
-  
 
-  // ✅ Add new question
   const addNewQuestion = () => {
     setQuestions([
       ...questions,
@@ -85,48 +76,41 @@ const EditExamPage = () => {
       },
     ]);
   };
-  
 
-  // ✅ Remove question
   const removeQuestion = (index) => {
     const updatedQuestions = questions.filter((_, i) => i !== index);
     setQuestions(updatedQuestions);
   };
 
-  // ✅ Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // ✅ Update Exam Details
       await dispatch(updateExam({ examId, updatedData: examData })).unwrap();
 
-      // ✅ Update or Add Questions
       const updatedQuestions = questions.filter((q) => q.text.trim() !== "");
 
       if (updatedQuestions.length) {
         const existingQuestions = updatedQuestions.filter((q) => q.questionId);
         const newQuestions = updatedQuestions.filter((q) => !q.questionId);
 
-        // ✅ Update existing questions
         for (const question of existingQuestions) {
           await dispatch(
             updateQuestion({
               questionId: question.questionId,
               updatedData: question,
-            })
+            }),
           ).unwrap();
         }
 
-        // ✅ Add new questions
         if (newQuestions.length) {
           await dispatch(
-            addQuestions({ examId, questions: newQuestions })
+            addQuestions({ examId, questions: newQuestions }),
           ).unwrap();
         }
       }
 
       toast.success("Exam and questions updated successfully!");
-      navigate("/exams"); // Redirect to exams list
+      navigate("/exams");
     } catch (error) {
       toast.error("Error updating exam: " + error.message);
     }
@@ -138,7 +122,6 @@ const EditExamPage = () => {
       typeof error === "string" ? error : JSON.stringify(error);
     return <p>Error: {errorMessage}</p>;
   }
-  
 
   return (
     <div className="container mx-auto p-6">
@@ -158,20 +141,20 @@ const EditExamPage = () => {
         </div>
 
         <div>
-            <label className="block text-lg font-medium text-gray-700">
-              Exam Code
-            </label>
-            <input
-              className="input-field px-2 py-1 outline w-full"
-              type="text"
-              name="code"
-              placeholder="Enter a unique exam code (e.g., JBT101)"
-              value={examData.code}
-              onChange={handleExamChange}
-              required
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-6">
+          <label className="block text-lg font-medium text-gray-700">
+            Exam Code
+          </label>
+          <input
+            className="input-field px-2 py-1 outline w-full"
+            type="text"
+            name="code"
+            placeholder="Enter a unique exam code (e.g., JBT101)"
+            value={examData.code}
+            onChange={handleExamChange}
+            required
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-6">
           <div>
             <label className="block text-lg font-medium text-gray-700">
               Subject
@@ -246,7 +229,6 @@ const EditExamPage = () => {
           </div>
         </div>
 
-        {/* Exam Type Dropdown */}
         <div>
           <label className="block text-lg font-medium text-gray-700">
             Select Exam Type
@@ -262,7 +244,6 @@ const EditExamPage = () => {
           </select>
         </div>
 
-        {/* ✅ Question Management */}
         <h3 className="text-xl font-bold mt-6">Questions</h3>
         {questions.map((question, index) => (
           <div key={index} className="border p-4 rounded mb-4">
@@ -292,19 +273,22 @@ const EditExamPage = () => {
               />
             ))}
             <select
-            value={question.correctOption ?? 0}
-            onChange={(e) =>
-              handleQuestionChange(index, "correctOption", parseInt(e.target.value, 10))
-            }
-            className="w-full p-2 border rounded mb-2"
-          >
-            {question.options?.map((option, optIndex) => (
-              <option key={optIndex} value={optIndex}>
-                {option || `Option ${optIndex + 1}`}
-              </option>
-            ))}
-          </select>
-
+              value={question.correctOption ?? 0}
+              onChange={(e) =>
+                handleQuestionChange(
+                  index,
+                  "correctOption",
+                  parseInt(e.target.value, 10),
+                )
+              }
+              className="w-full p-2 border rounded mb-2"
+            >
+              {question.options?.map((option, optIndex) => (
+                <option key={optIndex} value={optIndex}>
+                  {option || `Option ${optIndex + 1}`}
+                </option>
+              ))}
+            </select>
 
             <button
               type="button"
@@ -324,11 +308,7 @@ const EditExamPage = () => {
           Add New Question
         </button>
 
-        {/* ✅ Submit Button */}
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-6 py-2 mt-4"
-        >
+        <button type="submit" className="bg-blue-600 text-white px-6 py-2 mt-4">
           Save Changes
         </button>
       </form>

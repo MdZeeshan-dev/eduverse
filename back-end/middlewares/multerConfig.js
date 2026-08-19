@@ -3,12 +3,11 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("../config/cloudinary");
 const { v4: uuidv4 } = require("uuid");
 
-// ✅ Dynamic Storage Based on File Type
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: async (req, file) => {
     let folder = "general_uploads";
-    let resourceType = "raw"; // Cloudinary treats CSV as "raw" files
+    let resourceType = "raw"; 
 
     if (file.mimetype.startsWith("image/")) {
       folder = req.baseUrl.includes("/courses") ? "course_images" : "user_profiles";
@@ -31,7 +30,7 @@ const storage = new CloudinaryStorage({
     }
 
     if (file.mimetype === "text/csv") {
-      folder = "exam_questions"; // Store CSV files in a dedicated folder
+      folder = "exam_questions";
       return {
         folder,
         format: "csv",
@@ -44,10 +43,10 @@ const storage = new CloudinaryStorage({
   },
 });
 
-// ✅ Handle CSV Uploads Along with Other Files
+
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 100 * 1024 * 1024 }, // 50 MB max file size
+  limits: { fileSize: 100 * 1024 * 1024 }, 
 });
 
 module.exports = {
@@ -57,5 +56,5 @@ module.exports = {
     // { name: "bannerImage", maxCount: 1 },
     { name: "lessonVideos", maxCount: 50 },
   ]),
-  uploadCSV: upload.single("file"), // ✅ Add this for CSV uploads
+  uploadCSV: upload.single("file"), 
 };

@@ -22,7 +22,6 @@ import MousePointer from "../components/MousePointer";
 import { motion } from "framer-motion";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 
-
 const Home = () => {
   const dispatch = useDispatch();
   const { courses } = useSelector((state) => state.courses);
@@ -88,62 +87,61 @@ const Home = () => {
   return (
     <div className="font-sans bg-gray-200">
       <MousePointer />
-      {/* Hero Section with Slider */}
+
       <section
-  className="relative h-auto md:h-[600px] bg-cover bg-center text-white"
-  style={{ backgroundImage: `url(${herobg})` }}
->
-  <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-600/80 backdrop-blur-sm"></div>
+        className="relative h-auto md:h-[600px] bg-cover bg-center text-white"
+        style={{ backgroundImage: `url(${herobg})` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-600/80 backdrop-blur-sm"></div>
 
-  <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 px-4 sm:px-6 md:px-10 py-12 md:h-full">
-    <motion.div
-      className="w-full md:w-1/2 text-center md:text-left"
-      initial={{ x: -60, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.8 }}
-    >
-      <p className="text-yellow-300 text-xs sm:text-sm uppercase tracking-widest">
-        ● Featured Course
-      </p>
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-2 md:mt-3 drop-shadow-md leading-snug">
-        {featuredCourse ? featuredCourse.title : "Loading..."}
-      </h1>
-      <p className="mt-3 text-sm sm:text-base text-gray-200">
-        {featuredCourse ? featuredCourse.description : "Please wait..."}
-      </p>
-      <div className="mt-5 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-        {featuredCourse && (
-          <Link
-            to={`/CourseDetails/${featuredCourse._id}`}
-            className="bg-white text-blue-700 px-5 py-2 font-bold shadow hover:scale-105 transition text-sm sm:text-base"
+        <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 px-4 sm:px-6 md:px-10 py-12 md:h-full">
+          <motion.div
+            className="w-full md:w-1/2 text-center md:text-left"
+            initial={{ x: -60, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
           >
-            Start Course
-          </Link>
-        )}
-        <Link
-          to="/courses"
-          className="border border-white px-5 py-2 font-semibold hover:bg-white hover:text-blue-700 transition text-sm sm:text-base"
-        >
-          View All →
-        </Link>
-      </div>
-    </motion.div>
+            <p className="text-yellow-300 text-xs sm:text-sm uppercase tracking-widest">
+              ● Featured Course
+            </p>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-2 md:mt-3 drop-shadow-md leading-snug">
+              {featuredCourse ? featuredCourse.title : "Loading..."}
+            </h1>
+            <p className="mt-3 text-sm sm:text-base text-gray-200">
+              {featuredCourse ? featuredCourse.description : "Please wait..."}
+            </p>
+            <div className="mt-5 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+              {featuredCourse && (
+                <Link
+                  to={`/CourseDetails/${featuredCourse._id}`}
+                  className="bg-white text-blue-700 px-5 py-2 font-bold shadow hover:scale-105 transition text-sm sm:text-base"
+                >
+                  Start Course
+                </Link>
+              )}
+              <Link
+                to="/courses"
+                className="border border-white px-5 py-2 font-semibold hover:bg-white hover:text-blue-700 transition text-sm sm:text-base"
+              >
+                View All →
+              </Link>
+            </div>
+          </motion.div>
 
-    <motion.div
-      className="w-full md:w-1/2"
-      initial={{ scale: 0.8, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.8, delay: 0.3 }}
-    >
-      <img
-        src={featuredCourse ? featuredCourse.thumbnail : "Loading..."}
-        alt="Course"
-        className="rounded-xl shadow-lg w-full max-h-[250px] sm:max-h-[320px] object-cover"
-      />
-    </motion.div>
-  </div>
-</section>
-
+          <motion.div
+            className="w-full md:w-1/2"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <img
+              src={featuredCourse ? featuredCourse.thumbnail : "Loading..."}
+              alt="Course"
+              className="rounded-xl shadow-lg w-full max-h-[250px] sm:max-h-[320px] object-cover"
+            />
+          </motion.div>
+        </div>
+      </section>
 
       <section className="bg-white py-8">
         <div className="max-w-5xl mx-auto grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 gap-6 justify-items-center">
@@ -166,11 +164,10 @@ const Home = () => {
         </div>
       </section>
 
-
-
-      {/* Additional Courses */}
       <section className="py-16 px-6 md:px-16 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">Explore More Courses</h2>
+        <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
+          Explore More Courses
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {additionalCourses.map((course, index) => (
             <motion.div
@@ -193,10 +190,8 @@ const Home = () => {
         </div>
       </section>
 
-
       <Testimonial />
-      <ScrollToTopButton />  {/* 👈 Scroll to top button */}
-
+      <ScrollToTopButton />
     </div>
   );
 };

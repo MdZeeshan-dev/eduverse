@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser, updateUser } from "../redux/userSlice";
-import {Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 
 const Settings = () => {
@@ -40,8 +40,16 @@ const Settings = () => {
         email: currentUser.email || "",
         phoneNumber: currentUser.phoneNumber || "",
         gender: currentUser.gender || "",
-        dateOfBirth: currentUser.dateOfBirth ? currentUser.dateOfBirth.split("T")[0] : "",
-        address: currentUser.address || { local: "", city: "", state: "", country: "", pincode: "" },
+        dateOfBirth: currentUser.dateOfBirth
+          ? currentUser.dateOfBirth.split("T")[0]
+          : "",
+        address: currentUser.address || {
+          local: "",
+          city: "",
+          state: "",
+          country: "",
+          pincode: "",
+        },
         profession: currentUser.profession || "",
         organization: currentUser.organization || { name: "", address: "" },
         qualification: currentUser.qualification || "",
@@ -50,7 +58,12 @@ const Settings = () => {
         interests: currentUser.interests || "",
         professionalTitle: currentUser.professionalTitle || "",
         totalExperience: currentUser.totalExperience || "",
-        socialLinks: currentUser.socialLinks || { linkedIn: "", github: "", youtube: "", twitter: "" },
+        socialLinks: currentUser.socialLinks || {
+          linkedIn: "",
+          github: "",
+          youtube: "",
+          twitter: "",
+        },
         careerDescription: currentUser.careerDescription || "",
         accessLevel: currentUser.accessLevel || "",
       });
@@ -73,7 +86,9 @@ const Settings = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(updateUser({ id: currentUser._id, updates: formData })).unwrap();
+      await dispatch(
+        updateUser({ id: currentUser._id, updates: formData }),
+      ).unwrap();
       alert("Profile updated successfully!");
       navigate("/profile");
     } catch (error) {
@@ -84,7 +99,7 @@ const Settings = () => {
   return (
     <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
       <Link to="/profile">
-      <FaArrowLeft/> 
+        <FaArrowLeft />
       </Link>
       <h2 className="text-2xl font-bold mb-5">Update Details</h2>
 
@@ -124,7 +139,6 @@ const Settings = () => {
           />
         </div>
 
-        {/* Common Address Fields */}
         <div>
           <label className="block text-sm font-medium">City</label>
           <input
@@ -176,7 +190,9 @@ const Settings = () => {
         {currentUser?.role === "trainer" && (
           <>
             <div>
-              <label className="block text-sm font-medium">Professional Title</label>
+              <label className="block text-sm font-medium">
+                Professional Title
+              </label>
               <input
                 type="text"
                 name="professionalTitle"
@@ -187,7 +203,9 @@ const Settings = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium">Total Experience (Years)</label>
+              <label className="block text-sm font-medium">
+                Total Experience (Years)
+              </label>
               <input
                 type="number"
                 name="totalExperience"
@@ -216,7 +234,6 @@ const Settings = () => {
           </div>
         )}
 
-        {/* Social Links */}
         <div>
           <label className="block text-sm font-medium">LinkedIn</label>
           <input

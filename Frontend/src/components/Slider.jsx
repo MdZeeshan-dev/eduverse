@@ -52,7 +52,6 @@ const Card = () => {
 
   return (
     <div className="w-full overflow-hidden relative">
-      {/* Scrolling Container */}
       <div className="flex w-max animate-marquee group-hover">
         {[...cards, ...cards].map((card, index) => (
           <div

@@ -1,14 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import Cookies from "js-cookie"; 
+import Cookies from "js-cookie";
 
-// Define the base API URL
 const API_BASE_URL = "https://http://localhost:5000/api/exams";
 
 const isTokenValid = (token) => {
   try {
-    const payload = JSON.parse(atob(token.split(".")[1])); // Decode JWT payload
-    return payload.exp * 1000 > Date.now(); // Check if expired
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.exp * 1000 > Date.now();
   } catch (error) {
     return false;
   }
@@ -19,7 +18,6 @@ const getToken = () => {
   return token && isTokenValid(token) ? token.trim() : null;
 };
 
-
 export const fetchExams = createAsyncThunk(
   "exam/fetchExams",
   async (_, { rejectWithValue }) => {
@@ -29,16 +27,15 @@ export const fetchExams = createAsyncThunk(
 
       const response = await axios.get(`${API_BASE_URL}/all`, {
         headers: { Authorization: `Bearer ${token}` },
-        withCredentials: true, // Ensures cookies are sent
+        withCredentials: true,
       });
 
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || "Failed to fetch exams");
     }
-  }
+  },
 );
-
 
 export const createExam = createAsyncThunk(
   "exam/createExam",
@@ -56,7 +53,7 @@ export const createExam = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response?.data || "Failed to create exam");
     }
-  }
+  },
 );
 
 export const addQuestions = createAsyncThunk(
@@ -72,14 +69,14 @@ export const addQuestions = createAsyncThunk(
         {
           headers: { Authorization: `Bearer ${token}` },
           withCredentials: true,
-        }
+        },
       );
 
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || "Failed to add questions");
     }
-  }
+  },
 );
 
 export const deleteExam = createAsyncThunk(
@@ -98,9 +95,8 @@ export const deleteExam = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response?.data || "Failed to delete exam");
     }
-  }
+  },
 );
-
 
 export const deleteQuestion = createAsyncThunk(
   "exam/deleteQuestion",
@@ -114,16 +110,16 @@ export const deleteQuestion = createAsyncThunk(
         {
           headers: { Authorization: `Bearer ${token}` },
           withCredentials: true,
-        }
+        },
       );
 
       return { questionId, message: response.data.message };
     } catch (error) {
       return rejectWithValue(
-        error.response?.data || "Failed to delete question"
+        error.response?.data || "Failed to delete question",
       );
     }
-  }
+  },
 );
 
 export const fetchExamQuestions = createAsyncThunk(
@@ -140,11 +136,12 @@ export const fetchExamQuestions = createAsyncThunk(
 
       return { examId, questions: response.data };
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Failed to fetch questions");
+      return rejectWithValue(
+        error.response?.data || "Failed to fetch questions",
+      );
     }
-  }
+  },
 );
-
 
 export const enrollExam = createAsyncThunk(
   "exam/enrollExam",
@@ -159,16 +156,17 @@ export const enrollExam = createAsyncThunk(
         {
           headers: { Authorization: `Bearer ${token}` },
           withCredentials: true,
-        }
+        },
       );
 
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Failed to enroll in exam");
+      return rejectWithValue(
+        error.response?.data || "Failed to enroll in exam",
+      );
     }
-  }
+  },
 );
-
 
 export const fetchEnrolledExams = createAsyncThunk(
   "exam/fetchEnrolledExams",
@@ -184,40 +182,42 @@ export const fetchEnrolledExams = createAsyncThunk(
 
       return response.data.enrolledExams;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Failed to fetch enrolled exams");
+      return rejectWithValue(
+        error.response?.data || "Failed to fetch enrolled exams",
+      );
     }
-  }
+  },
 );
 
 export const submitResult = createAsyncThunk(
   "exam/submitResult",
   async (resultData, { rejectWithValue }) => {
     try {
-      const token = getToken(); 
+      const token = getToken();
       if (!token) throw new Error("Unauthorized - No token");
 
       const response = await axios.post(
-        `${API_BASE_URL}/submit-result`, 
+        `${API_BASE_URL}/submit-result`,
         resultData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json", 
+            "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       return response.data;
     } catch (error) {
-      console.error("Error submitting result:", error.response?.data || error.message);
+      console.error(
+        "Error submitting result:",
+        error.response?.data || error.message,
+      );
       return rejectWithValue(error.response?.data || "Failed to submit result");
     }
-  }
+  },
 );
 
-
-
-// ✅ Fetch Results for a User
 export const fetchResults = createAsyncThunk(
   "exam/fetchResults",
   async (_, { rejectWithValue }) => {
@@ -229,21 +229,18 @@ export const fetchResults = createAsyncThunk(
 
       const response = await axios.get(`${API_BASE_URL}/submitted-results`, {
         headers: { Authorization: `Bearer ${token}` },
-        withCredentials: true, // Only needed if backend uses cookies
+        withCredentials: true,
       });
 
-
-      // ✅ Return results correctly
       return response.data;
     } catch (error) {
-      // ✅ Proper error handling
       return rejectWithValue(
-        error.response?.data?.message || "Failed to fetch results"
+        error.response?.data?.message || "Failed to fetch results",
       );
     }
-  }
+  },
 );
-// ✅ Fetch Created Exams (Only Trainers & Admins)
+
 export const fetchCreatedExams = createAsyncThunk(
   "exam/fetchCreatedExams",
   async (_, { rejectWithValue }) => {
@@ -260,14 +257,15 @@ export const fetchCreatedExams = createAsyncThunk(
         return rejectWithValue("No exams found.");
       }
 
-      return response.data; // ✅ Ensure backend returns correct structure
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Failed to fetch created exams");
+      return rejectWithValue(
+        error.response?.data || "Failed to fetch created exams",
+      );
     }
-  }
+  },
 );
 
-// ✅ Generate Certificate for Passed Students
 export const generateCertificate = createAsyncThunk(
   "exam/generateCertificate",
   async (examId, { rejectWithValue }) => {
@@ -276,28 +274,30 @@ export const generateCertificate = createAsyncThunk(
       const token = getToken();
       if (!token) throw new Error("Unauthorized - No token found");
 
-      const response = await axios.get(`${API_BASE_URL}/${examId}/certificate`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await axios.get(
+        `${API_BASE_URL}/${examId}/certificate`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
         },
-        withCredentials: true, // Ensure cookies are sent if required
-
-      });
+      );
 
       if (!response.data.success) throw new Error(response.data.message);
 
-      // ✅ Open the certificate URL in a new tab
       window.open(response.data.certificateUrl, "_blank");
 
       return { success: true, message: "Certificate opened successfully." };
     } catch (error) {
       console.error("Certificate Generation Error:", error);
-      return rejectWithValue(error.response?.data || "Failed to generate certificate");
+      return rejectWithValue(
+        error.response?.data || "Failed to generate certificate",
+      );
     }
-  }
+  },
 );
 
-// ✅ Update Exam (Only trainers can access)
 export const updateExam = createAsyncThunk(
   "exam/updateExam",
   async ({ examId, updatedData }, { rejectWithValue }) => {
@@ -311,17 +311,16 @@ export const updateExam = createAsyncThunk(
         {
           headers: { Authorization: `Bearer ${token}` },
           withCredentials: true,
-        }
+        },
       );
 
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || "Failed to update exam");
     }
-  }
+  },
 );
 
-// ✅ Update Question (Only trainers can access)
 export const updateQuestion = createAsyncThunk(
   "exam/updateQuestion",
   async ({ questionId, updatedData }, { rejectWithValue }) => {
@@ -335,27 +334,24 @@ export const updateQuestion = createAsyncThunk(
         {
           headers: { Authorization: `Bearer ${token}` },
           withCredentials: true,
-        }
+        },
       );
 
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data || "Failed to update question"
+        error.response?.data || "Failed to update question",
       );
     }
-  }
+  },
 );
 
-
-
-// ✅ Exam Slice
 const examSlice = createSlice({
   name: "exam",
   initialState: {
     exams: [],
     enrolledExams: [],
-    results: [], // ✅ Store results
+    results: [],
     createdExams: [],
     loading: false,
     status: "idle",
@@ -389,19 +385,19 @@ const examSlice = createSlice({
         const { examId, questions } = action.payload;
         const updatedExam = state.exams.find((exam) => exam._id === examId);
         if (updatedExam) {
-          updatedExam.questions = [...updatedExam.questions, ...questions]; // ✅ Fix updating questions
+          updatedExam.questions = [...updatedExam.questions, ...questions];
         }
       })
 
       .addCase(addQuestions.rejected, (state, action) => {
         state.error = action.payload;
       })
-      // Fetch Questions for a Specific Exam
+
       .addCase(fetchExamQuestions.fulfilled, (state, action) => {
         const { examId, questions } = action.payload;
         const exam = state.exams.find((e) => e._id === examId);
         if (exam) {
-          exam.questions = questions; // ✅ Ensure questions are stored
+          exam.questions = questions;
         }
         state.status = "succeeded";
       })
@@ -417,7 +413,6 @@ const examSlice = createSlice({
         state.status = "failed";
       })
 
-      // ✅ Fetch Enrolled Exams
       .addCase(fetchEnrolledExams.fulfilled, (state, action) => {
         state.enrolledExams = action.payload; // Store enrolled exams
         state.status = "succeeded";
@@ -434,13 +429,12 @@ const examSlice = createSlice({
         state.status = "failed";
       })
 
-      // ✅ Fetch Results
       .addCase(fetchResults.pending, (state) => {
         state.loading = true;
       })
       .addCase(fetchResults.fulfilled, (state, action) => {
         state.loading = false;
-        state.results = action.payload; // ✅ Ensure correct data assignment
+        state.results = action.payload;
       })
 
       .addCase(fetchResults.rejected, (state, action) => {
@@ -452,7 +446,7 @@ const examSlice = createSlice({
       })
       .addCase(fetchCreatedExams.fulfilled, (state, action) => {
         state.loading = false;
-        state.exams = action.payload; // ✅ Store created exams
+        state.exams = action.payload;
       })
       .addCase(fetchCreatedExams.rejected, (state, action) => {
         state.loading = false;
@@ -477,7 +471,7 @@ const examSlice = createSlice({
         state.loading = false;
         const updatedExam = action.payload;
         state.exams = state.exams.map((exam) =>
-          exam._id === updatedExam._id ? updatedExam : exam
+          exam._id === updatedExam._id ? updatedExam : exam,
         );
       })
       .addCase(updateExam.rejected, (state, action) => {
@@ -494,17 +488,17 @@ const examSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-       // ✅ Delete exam
-       .addCase(deleteExam.fulfilled, (state, action) => {
+
+      .addCase(deleteExam.fulfilled, (state, action) => {
         state.exams = state.exams.filter(
-          (exam) => exam._id !== action.payload.examId
+          (exam) => exam._id !== action.payload.examId,
         );
       })
-      // ✅ Delete question
+
       .addCase(deleteQuestion.fulfilled, (state, action) => {
         state.exams.forEach((exam) => {
           exam.questions = exam.questions.filter(
-            (q) => q._id !== action.payload.questionId
+            (q) => q._id !== action.payload.questionId,
           );
         });
       });

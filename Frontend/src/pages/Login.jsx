@@ -17,8 +17,8 @@ function Login({ isOpen, onClose, onRegisterClick }) {
         return;
       }
       toast.success("Login successfully!");
-      onClose(); // ✅ Close modal
-      dispatch(resetAuthState()); // ✅ Reset auth state
+      onClose();
+      dispatch(resetAuthState());
     }
   }, [success, dispatch, onClose]);
 
@@ -31,7 +31,7 @@ function Login({ isOpen, onClose, onRegisterClick }) {
     dispatch(loginUser(formData));
   };
 
-  if (!isOpen) return null; // ✅ Ensure modal doesn't render when `isOpen` is false
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-transparent backdrop-blur-md z-50">
@@ -44,7 +44,10 @@ function Login({ isOpen, onClose, onRegisterClick }) {
       >
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Login</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700 text-xl">
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-700 text-xl"
+          >
             &times;
           </button>
         </div>
@@ -78,7 +81,10 @@ function Login({ isOpen, onClose, onRegisterClick }) {
             />
           </div>
 
-          <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700">
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700"
+          >
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
@@ -91,7 +97,10 @@ function Login({ isOpen, onClose, onRegisterClick }) {
         >
           <p>
             Don't have an account?{" "}
-            <button onClick={onRegisterClick} className="text-blue-600 underline">
+            <button
+              onClick={onRegisterClick}
+              className="text-blue-600 underline"
+            >
               Register
             </button>
           </p>

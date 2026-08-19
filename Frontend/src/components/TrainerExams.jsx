@@ -1,4 +1,3 @@
-// TrainerExams.jsx
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCreatedExams, deleteExam } from "../redux/examSlice";
@@ -48,12 +47,23 @@ const TrainerExams = () => {
             transition={{ duration: 0.4 }}
             className="bg-white p-6 rounded-xl shadow hover:shadow-xl border border-gray-100"
           >
-            <h3 className="text-xl font-bold text-purple-700 mb-2">{exam.title}</h3>
+            <h3 className="text-xl font-bold text-purple-700 mb-2">
+              {exam.title}
+            </h3>
             <div className="space-y-1 text-sm text-gray-700">
-              <p><strong>Subject:</strong> {exam.subject}</p>
-              <p><strong>Date:</strong> {new Date(exam.date).toLocaleDateString()}</p>
-              <p><strong>Duration:</strong> {exam.duration} minutes</p>
-              <p><strong>Total Marks:</strong> {exam.totalMarks}</p>
+              <p>
+                <strong>Subject:</strong> {exam.subject}
+              </p>
+              <p>
+                <strong>Date:</strong>{" "}
+                {new Date(exam.date).toLocaleDateString()}
+              </p>
+              <p>
+                <strong>Duration:</strong> {exam.duration} minutes
+              </p>
+              <p>
+                <strong>Total Marks:</strong> {exam.totalMarks}
+              </p>
             </div>
 
             <div className="mt-4 space-y-2">

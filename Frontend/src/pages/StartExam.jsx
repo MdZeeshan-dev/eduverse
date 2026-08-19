@@ -35,8 +35,18 @@ const StartExam = () => {
     }
   }, [timeLeft, showResult]);
 
-  if (!exam) return <div className="flex items-center justify-center h-screen text-gray-600">Loading Exam...</div>;
-  if (!exam.questions || exam.questions.length === 0) return <div className="flex items-center justify-center h-screen text-red-500">No questions available.</div>;
+  if (!exam)
+    return (
+      <div className="flex items-center justify-center h-screen text-gray-600">
+        Loading Exam...
+      </div>
+    );
+  if (!exam.questions || exam.questions.length === 0)
+    return (
+      <div className="flex items-center justify-center h-screen text-red-500">
+        No questions available.
+      </div>
+    );
 
   const currentQuestion = exam.questions[currentQuestionIndex];
 
@@ -50,15 +60,23 @@ const StartExam = () => {
       return acc;
     }, {});
     const marksPerQuestion = exam.totalMarks / exam.questions.length;
-    const correct = Object.keys(selectedAnswers).filter((key) => selectedAnswers[key] === correctAnswers[key]).length;
+    const correct = Object.keys(selectedAnswers).filter(
+      (key) => selectedAnswers[key] === correctAnswers[key],
+    ).length;
     const incorrect = Object.keys(selectedAnswers).length - correct;
     const obtainedMarks = correct * marksPerQuestion;
 
     dispatch(
       submitResult({
         examId,
-        result: { selectedAnswers, correct, incorrect, obtainedMarks, totalQuestions: exam.questions.length },
-      })
+        result: {
+          selectedAnswers,
+          correct,
+          incorrect,
+          obtainedMarks,
+          totalQuestions: exam.questions.length,
+        },
+      }),
     );
   };
 
@@ -77,11 +95,11 @@ const StartExam = () => {
 
   const handleGenerateCertificate = () => dispatch(generateCertificate(examId));
 
-  const formatTime = (t) => `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")}`;
+  const formatTime = (t) =>
+    `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")}`;
 
   return (
     <div className="flex max-w-7xl mx-auto mt-10">
-      {/* Sidebar */}
       <aside className="w-64 bg-gray-100 p-4 rounded-lg shadow h-fit sticky top-10">
         <h3 className="text-lg font-bold mb-4">Questions</h3>
         <div className="grid grid-cols-4 gap-2">
@@ -90,7 +108,11 @@ const StartExam = () => {
               key={index}
               onClick={() => setCurrentQuestionIndex(index)}
               className={`rounded-full w-10 h-10 flex items-center justify-center text-sm font-semibold shadow transition-all ${
-                index === currentQuestionIndex ? "bg-blue-600 text-white" : selectedAnswers[exam.questions[index]._id] ? "bg-green-500 text-white" : "bg-gray-300 text-gray-800 hover:bg-gray-400"
+                index === currentQuestionIndex
+                  ? "bg-blue-600 text-white"
+                  : selectedAnswers[exam.questions[index]._id]
+                    ? "bg-green-500 text-white"
+                    : "bg-gray-300 text-gray-800 hover:bg-gray-400"
               }`}
             >
               {index + 1}
@@ -99,7 +121,6 @@ const StartExam = () => {
         </div>
       </aside>
 
-      {/* Main Content */}
       <div className="flex-1 ml-10 bg-white p-6 rounded-lg shadow">
         <div className="mb-4 flex justify-between items-center">
           <div>
@@ -107,16 +128,26 @@ const StartExam = () => {
             <p className="text-gray-600">Exam Code: {exam.code}</p>
           </div>
           <div className="text-right">
-            <p className="text-sm text-red-600 font-semibold">Time Left: {formatTime(timeLeft)}</p>
-            <p className="text-sm text-gray-500">Total Marks: {exam.totalMarks}</p>
-            <p className="text-sm text-gray-500">Questions: {exam.questions.length}</p>
+            <p className="text-sm text-red-600 font-semibold">
+              Time Left: {formatTime(timeLeft)}
+            </p>
+            <p className="text-sm text-gray-500">
+              Total Marks: {exam.totalMarks}
+            </p>
+            <p className="text-sm text-gray-500">
+              Questions: {exam.questions.length}
+            </p>
           </div>
         </div>
 
         <hr className="my-4" />
 
-        <h3 className="text-lg font-semibold text-gray-700 mb-2">Question {currentQuestionIndex + 1} of {exam.questions.length}</h3>
-        <p className="text-gray-800 font-medium mb-4">{currentQuestion?.text}</p>
+        <h3 className="text-lg font-semibold text-gray-700 mb-2">
+          Question {currentQuestionIndex + 1} of {exam.questions.length}
+        </h3>
+        <p className="text-gray-800 font-medium mb-4">
+          {currentQuestion?.text}
+        </p>
 
         <div className="space-y-2">
           {currentQuestion?.options?.map((option, index) => (
@@ -144,7 +175,9 @@ const StartExam = () => {
             disabled={!selectedAnswers[currentQuestion._id]}
             className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition disabled:bg-gray-400"
           >
-            {currentQuestionIndex === exam.questions.length - 1 ? "Finish" : "Next"}
+            {currentQuestionIndex === exam.questions.length - 1
+              ? "Finish"
+              : "Next"}
           </button>
         </div>
 
@@ -152,23 +185,64 @@ const StartExam = () => {
           <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6 max-w-md w-full shadow-xl">
               <h2 className="text-xl font-bold text-gray-800">Exam Results</h2>
-              <p className="mt-4 text-green-600">Correct: {Object.keys(selectedAnswers).filter((key) => selectedAnswers[key] === exam.questions.find(q => q._id === key)?.correctAnswer).length}</p>
-              <p className="text-red-600">Incorrect: {Object.keys(selectedAnswers).filter((key) => selectedAnswers[key] !== exam.questions.find(q => q._id === key)?.correctAnswer).length}</p>
-              <p className="mt-4 font-bold text-gray-700">Marks Obtained: <span className="text-blue-600">{Object.keys(selectedAnswers).filter((key) => selectedAnswers[key] === exam.questions.find(q => q._id === key)?.correctAnswer).length * (exam.totalMarks / exam.questions.length)} / {exam.totalMarks}</span></p>
+              <p className="mt-4 text-green-600">
+                Correct:{" "}
+                {
+                  Object.keys(selectedAnswers).filter(
+                    (key) =>
+                      selectedAnswers[key] ===
+                      exam.questions.find((q) => q._id === key)?.correctAnswer,
+                  ).length
+                }
+              </p>
+              <p className="text-red-600">
+                Incorrect:{" "}
+                {
+                  Object.keys(selectedAnswers).filter(
+                    (key) =>
+                      selectedAnswers[key] !==
+                      exam.questions.find((q) => q._id === key)?.correctAnswer,
+                  ).length
+                }
+              </p>
+              <p className="mt-4 font-bold text-gray-700">
+                Marks Obtained:{" "}
+                <span className="text-blue-600">
+                  {Object.keys(selectedAnswers).filter(
+                    (key) =>
+                      selectedAnswers[key] ===
+                      exam.questions.find((q) => q._id === key)?.correctAnswer,
+                  ).length *
+                    (exam.totalMarks / exam.questions.length)}{" "}
+                  / {exam.totalMarks}
+                </span>
+              </p>
 
-              {exam.type === "Certification Exam" && (
-                certificateUrl ? (
-                  <a href={certificateUrl} download className="mt-4 block text-center px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+              {exam.type === "Certification Exam" &&
+                (certificateUrl ? (
+                  <a
+                    href={certificateUrl}
+                    download
+                    className="mt-4 block text-center px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+                  >
                     Download Certificate
                   </a>
                 ) : (
-                  <button onClick={handleGenerateCertificate} disabled={status === "loading"} className="mt-4 w-full px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                    {status === "loading" ? "Generating..." : "Generate Certificate"}
+                  <button
+                    onClick={handleGenerateCertificate}
+                    disabled={status === "loading"}
+                    className="mt-4 w-full px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                  >
+                    {status === "loading"
+                      ? "Generating..."
+                      : "Generate Certificate"}
                   </button>
-                )
-              )}
+                ))}
 
-              <button onClick={() => navigate("/exams")} className="mt-4 w-full px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition">
+              <button
+                onClick={() => navigate("/exams")}
+                className="mt-4 w-full px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition"
+              >
                 Close
               </button>
             </div>
@@ -179,7 +253,9 @@ const StartExam = () => {
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="bg-white p-6 rounded-lg shadow-md max-w-md">
               <h2 className="text-xl font-bold text-red-600">Time's Up!</h2>
-              <p className="mt-4 text-gray-600">The exam time has expired. Please submit your answers.</p>
+              <p className="mt-4 text-gray-600">
+                The exam time has expired. Please submit your answers.
+              </p>
               <button
                 onClick={() => {
                   handleSubmitResult();

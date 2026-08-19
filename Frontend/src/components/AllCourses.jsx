@@ -64,7 +64,7 @@ const AllCourses = () => {
 
     return (
         <div className="flex min-h-screen bg-gray-100">
-            {/* Sidebar */}
+           
             <aside className="w-64 bg-blue-900 text-white p-5">
                 <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
                 <nav>
@@ -103,7 +103,7 @@ const AllCourses = () => {
                 </nav>
             </aside>
 
-            {/* Main Content */}
+          
             <main className="flex-1 p-6">
                 <h2 className="text-3xl font-bold mb-6 text-center">All Courses</h2>
 
@@ -172,7 +172,7 @@ const AllCourses = () => {
                     </div>
                 )}
 
-                {/* Pagination */}
+               
                 <div className="flex justify-center mt-8 space-x-4">
                     <button
                         onClick={prevPage}

@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
-import userReducer from "./userSlice"; 
-import courseReducer from "./courseSlice"; 
+import userReducer from "./userSlice";
+import courseReducer from "./courseSlice";
 import examReducer from "./examSlice";
 import adminReducer from "./adminSlice";
 

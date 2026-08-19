@@ -13,7 +13,9 @@ const Profile = () => {
   const dispatch = useDispatch();
   const { currentUser, loading, error } = useSelector((state) => state.users);
   const { enrolledCourses } = useSelector((state) => state.courses);
-  const { results, loading: resultsLoading } = useSelector((state) => state.exam);
+  const { results, loading: resultsLoading } = useSelector(
+    (state) => state.exam,
+  );
 
   const [preview, setPreview] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -57,7 +59,8 @@ const Profile = () => {
   }
 
   if (error) return <p className="text-red-500 text-center">{error}</p>;
-  if (!currentUser) return <p className="text-center">No user profile found.</p>;
+  if (!currentUser)
+    return <p className="text-center">No user profile found.</p>;
 
   return (
     <motion.div
@@ -66,18 +69,21 @@ const Profile = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      {/* Profile Header */}
       <motion.div
         className="flex flex-col md:flex-row items-center gap-6 border-b pb-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
       >
-        {/* Profile Picture */}
         <div className="relative">
-          <button onClick={() => setModalOpen(true)} className="focus:outline-none">
+          <button
+            onClick={() => setModalOpen(true)}
+            className="focus:outline-none"
+          >
             <img
-              src={preview || currentUser.profilePicture || "/default-avatar.png"}
+              src={
+                preview || currentUser.profilePicture || "/default-avatar.png"
+              }
               alt="Profile"
               className="w-28 h-28 md:w-32 md:h-32 rounded-full border-4 border-blue-400 shadow-xl object-cover"
             />
@@ -87,9 +93,10 @@ const Profile = () => {
           </span>
         </div>
 
-        {/* User Info */}
         <div className="text-center md:text-left">
-          <h2 className="text-3xl font-bold text-gray-800">{currentUser.fullName}</h2>
+          <h2 className="text-3xl font-bold text-gray-800">
+            {currentUser.fullName}
+          </h2>
           <p className="text-gray-600 text-lg">@{currentUser.username}</p>
         </div>
 
@@ -101,7 +108,6 @@ const Profile = () => {
         <ChangePasswordModal />
       </motion.div>
 
-      {/* Modal */}
       {modalOpen && (
         <motion.div
           className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50"
@@ -113,14 +119,21 @@ const Profile = () => {
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
           >
-            <h3 className="text-xl font-semibold mb-4">Update Profile Picture</h3>
+            <h3 className="text-xl font-semibold mb-4">
+              Update Profile Picture
+            </h3>
             <img
-              src={preview || currentUser.profilePicture || "/default-avatar.png"}
+              src={
+                preview || currentUser.profilePicture || "/default-avatar.png"
+              }
               alt="Preview"
               className="w-full h-64 object-cover rounded-lg mb-4"
             />
 
-            <label htmlFor="profile-upload" className="block bg-blue-500 text-white py-2 px-4 rounded-md cursor-pointer text-center">
+            <label
+              htmlFor="profile-upload"
+              className="block bg-blue-500 text-white py-2 px-4 rounded-md cursor-pointer text-center"
+            >
               Choose New Picture
             </label>
             <input
@@ -155,35 +168,74 @@ const Profile = () => {
         </motion.div>
       )}
 
-      {/* Profile Info Section */}
-      <motion.div className="mt-6 grid md:grid-cols-2 gap-4 text-gray-700" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+      <motion.div
+        className="mt-6 grid md:grid-cols-2 gap-4 text-gray-700"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+      >
         {currentUser.privacySettings?.showEmail && (
-          <p><strong>Email:</strong> {currentUser.email}</p>
+          <p>
+            <strong>Email:</strong> {currentUser.email}
+          </p>
         )}
         {currentUser.privacySettings?.showPhone && currentUser.phoneNumber && (
-          <p><strong>Phone:</strong> {currentUser.phoneNumber}</p>
+          <p>
+            <strong>Phone:</strong> {currentUser.phoneNumber}
+          </p>
         )}
         {currentUser.dateOfBirth && (
-          <p><strong>Date of Birth:</strong> {new Date(currentUser.dateOfBirth).toLocaleDateString()}</p>
+          <p>
+            <strong>Date of Birth:</strong>{" "}
+            {new Date(currentUser.dateOfBirth).toLocaleDateString()}
+          </p>
         )}
         {currentUser.address?.city && (
-          <p><strong>Address:</strong> {`${currentUser.address.city}, ${currentUser.address.state}, ${currentUser.address.country}`}</p>
+          <p>
+            <strong>Address:</strong>{" "}
+            {`${currentUser.address.city}, ${currentUser.address.state}, ${currentUser.address.country}`}
+          </p>
         )}
       </motion.div>
 
-      {/* Role-Specific Sections */}
       <div className="mt-8 space-y-6">
         {currentUser.role === "learner" && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
-            <h3 className="text-2xl font-bold text-blue-800 mb-4">🎓 Learner Dashboard</h3>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            <h3 className="text-2xl font-bold text-blue-800 mb-4">
+              🎓 Learner Dashboard
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 bg-gradient-to-r from-blue-100 to-blue-50 p-4 rounded-lg shadow">
-              {currentUser.qualification && <p><strong>Qualification:</strong> {currentUser.qualification} ({currentUser.qualificationStatus})</p>}
-              {currentUser.degree && <p><strong>Degree:</strong> {currentUser.degree}</p>}
-              {currentUser.profession && currentUser.privacySettings?.showProfession && (
-                <p><strong>Profession:</strong> {currentUser.profession}</p>
+              {currentUser.qualification && (
+                <p>
+                  <strong>Qualification:</strong> {currentUser.qualification} (
+                  {currentUser.qualificationStatus})
+                </p>
               )}
-              {currentUser.organization?.name && <p><strong>Organization:</strong> {currentUser.organization.name}</p>}
-              {currentUser.interests && <p><strong>Interests:</strong> {currentUser.interests}</p>}
+              {currentUser.degree && (
+                <p>
+                  <strong>Degree:</strong> {currentUser.degree}
+                </p>
+              )}
+              {currentUser.profession &&
+                currentUser.privacySettings?.showProfession && (
+                  <p>
+                    <strong>Profession:</strong> {currentUser.profession}
+                  </p>
+                )}
+              {currentUser.organization?.name && (
+                <p>
+                  <strong>Organization:</strong> {currentUser.organization.name}
+                </p>
+              )}
+              {currentUser.interests && (
+                <p>
+                  <strong>Interests:</strong> {currentUser.interests}
+                </p>
+              )}
             </div>
             {enrolledCourses.length > 0 && (
               <div className="mt-4">
@@ -193,37 +245,83 @@ const Profile = () => {
           </motion.div>
         )}
 
-        {(currentUser.role === "examinee" || currentUser.role === "learner") && results?.length > 0 && (
-          <ExamResults results={results} />
-          
-        )}
+        {(currentUser.role === "examinee" || currentUser.role === "learner") &&
+          results?.length > 0 && <ExamResults results={results} />}
 
         {currentUser.role === "trainer" && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
-            <h3 className="text-2xl font-bold text-yellow-800 mb-4">🧑‍🏫 Trainer Dashboard</h3>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+          >
+            <h3 className="text-2xl font-bold text-yellow-800 mb-4">
+              🧑‍🏫 Trainer Dashboard
+            </h3>
             <div className="bg-yellow-50 p-4 rounded-lg shadow space-y-2">
-              {currentUser.professionalTitle && <p><strong>Title:</strong> {currentUser.professionalTitle}</p>}
-              {currentUser.totalExperience && <p><strong>Experience:</strong> {currentUser.totalExperience} years</p>}
-              {currentUser.careerDescription && <p><strong>Career:</strong> {currentUser.careerDescription}</p>}
-              {currentUser.socialLinks?.linkedIn && <p><strong>LinkedIn:</strong> {currentUser.socialLinks.linkedIn}</p>}
-              {currentUser.socialLinks?.github && <p><strong>Github:</strong> {currentUser.socialLinks.github}</p>}
+              {currentUser.professionalTitle && (
+                <p>
+                  <strong>Title:</strong> {currentUser.professionalTitle}
+                </p>
+              )}
+              {currentUser.totalExperience && (
+                <p>
+                  <strong>Experience:</strong> {currentUser.totalExperience}{" "}
+                  years
+                </p>
+              )}
+              {currentUser.careerDescription && (
+                <p>
+                  <strong>Career:</strong> {currentUser.careerDescription}
+                </p>
+              )}
+              {currentUser.socialLinks?.linkedIn && (
+                <p>
+                  <strong>LinkedIn:</strong> {currentUser.socialLinks.linkedIn}
+                </p>
+              )}
+              {currentUser.socialLinks?.github && (
+                <p>
+                  <strong>Github:</strong> {currentUser.socialLinks.github}
+                </p>
+              )}
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-              <Link to="/courseForm"><button className="dashboard-btn">➕ Add Course</button></Link>
-              <Link to="/create-exam"><button className="dashboard-btn">📝 Add Exam</button></Link>
-              <Link to="/trainer-courses"><button className="dashboard-btn">📚 My Courses</button></Link>
-              <Link to="/trainer-exams"><button className="dashboard-btn">📊 My Exams</button></Link>
+              <Link to="/courseForm">
+                <button className="dashboard-btn">➕ Add Course</button>
+              </Link>
+              <Link to="/create-exam">
+                <button className="dashboard-btn">📝 Add Exam</button>
+              </Link>
+              <Link to="/trainer-courses">
+                <button className="dashboard-btn">📚 My Courses</button>
+              </Link>
+              <Link to="/trainer-exams">
+                <button className="dashboard-btn">📊 My Exams</button>
+              </Link>
             </div>
           </motion.div>
         )}
 
         {currentUser.role === "admin" && (
-          <motion.div className="bg-gradient-to-r from-red-100 to-red-50 p-4 rounded-lg shadow" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
-            <h3 className="text-xl font-bold text-red-700 mb-2">🛠 Admin Dashboard</h3>
-            {currentUser.accessLevel && <p><strong>Access Level:</strong> {currentUser.accessLevel}</p>}
+          <motion.div
+            className="bg-gradient-to-r from-red-100 to-red-50 p-4 rounded-lg shadow"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+          >
+            <h3 className="text-xl font-bold text-red-700 mb-2">
+              🛠 Admin Dashboard
+            </h3>
+            {currentUser.accessLevel && (
+              <p>
+                <strong>Access Level:</strong> {currentUser.accessLevel}
+              </p>
+            )}
             <Link to="/admin/dash">
-              <button className="mt-3 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">Go to Admin Panel</button>
+              <button className="mt-3 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
+                Go to Admin Panel
+              </button>
             </Link>
           </motion.div>
         )}

@@ -27,7 +27,12 @@ const ChangePasswordModal = () => {
       return;
     }
 
-    dispatch(changePassword({ currentPassword: formData.currentPassword, newPassword: formData.newPassword }));
+    dispatch(
+      changePassword({
+        currentPassword: formData.currentPassword,
+        newPassword: formData.newPassword,
+      }),
+    );
   };
 
   const closeModal = () => {

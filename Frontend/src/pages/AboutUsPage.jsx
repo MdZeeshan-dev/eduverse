@@ -1,7 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
-// Animation variants for Framer Motion
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
@@ -20,7 +19,6 @@ const AboutUsPage = () => {
       initial="hidden"
       animate="visible"
     >
-      {/* Title Section */}
       <motion.h1
         className="text-4xl font-bold text-center mb-6 text-gray-800"
         variants={itemVariants}
@@ -34,32 +32,26 @@ const AboutUsPage = () => {
         Empowering learners to achieve their goals through innovative education.
       </motion.p>
 
-      {/* Mission Section */}
-      <motion.section
-        className="mb-12"
-        variants={itemVariants}
-      >
-        <h2 className="text-3xl font-semibold mb-4 text-gray-800">Our Mission</h2>
+      <motion.section className="mb-12" variants={itemVariants}>
+        <h2 className="text-3xl font-semibold mb-4 text-gray-800">
+          Our Mission
+        </h2>
         <p className="text-gray-700 leading-relaxed mb-6">
-          At LMS, our mission is to provide a seamless and engaging learning experience for students, educators, and professionals. We aim to make education accessible, interactive, and effective for everyone.
+          At LMS, our mission is to provide a seamless and engaging learning
+          experience for students, educators, and professionals. We aim to make
+          education accessible, interactive, and effective for everyone.
         </p>
         <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300">
           Learn More
         </button>
       </motion.section>
 
-      {/* Team Section */}
-      <motion.section
-        className="mb-12"
-        variants={itemVariants}
-      >
-        <h2 className="text-3xl font-semibold mb-8 text-center text-gray-800">Meet the Team</h2>
+      <motion.section className="mb-12" variants={itemVariants}>
+        <h2 className="text-3xl font-semibold mb-8 text-center text-gray-800">
+          Meet the Team
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Team Member 1 */}
-          <motion.div
-            className="text-center group"
-            variants={itemVariants}
-          >
+          <motion.div className="text-center group" variants={itemVariants}>
             <img
               src="/images/team-member1.jpg"
               alt="John Doe"
@@ -73,11 +65,7 @@ const AboutUsPage = () => {
             </p>
           </motion.div>
 
-          {/* Team Member 2 */}
-          <motion.div
-            className="text-center group"
-            variants={itemVariants}
-          >
+          <motion.div className="text-center group" variants={itemVariants}>
             <img
               src="/images/team-member2.jpg"
               alt="Jane Smith"
@@ -91,11 +79,7 @@ const AboutUsPage = () => {
             </p>
           </motion.div>
 
-          {/* Team Member 3 */}
-          <motion.div
-            className="text-center group"
-            variants={itemVariants}
-          >
+          <motion.div className="text-center group" variants={itemVariants}>
             <img
               src="/images/team-member3.jpg"
               alt="Alice Johnson"
@@ -111,21 +95,27 @@ const AboutUsPage = () => {
         </div>
       </motion.section>
 
-      {/* Values Section */}
-      <motion.section
-        className="mb-12"
-        variants={itemVariants}
-      >
-        <h2 className="text-3xl font-semibold mb-4 text-gray-800">Our Values</h2>
+      <motion.section className="mb-12" variants={itemVariants}>
+        <h2 className="text-3xl font-semibold mb-4 text-gray-800">
+          Our Values
+        </h2>
         <ul className="list-disc list-inside text-gray-700 leading-relaxed">
-          <li>Innovation: We constantly strive to improve and innovate our platform.</li>
-          <li>Accessibility: Education should be available to everyone, everywhere.</li>
+          <li>
+            Innovation: We constantly strive to improve and innovate our
+            platform.
+          </li>
+          <li>
+            Accessibility: Education should be available to everyone,
+            everywhere.
+          </li>
           <li>Collaboration: We believe in teamwork and shared success.</li>
-          <li>Quality: We are committed to delivering high-quality learning experiences.</li>
+          <li>
+            Quality: We are committed to delivering high-quality learning
+            experiences.
+          </li>
         </ul>
       </motion.section>
 
-      {/* Footer */}
       <motion.footer
         className="text-center border-t border-gray-200 pt-8 mt-12"
         variants={itemVariants}

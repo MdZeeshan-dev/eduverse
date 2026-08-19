@@ -20,7 +20,7 @@ const MousePointer = () => {
     <div
       className="fixed w-4 h-4 bg-blue-400 rounded-full pointer-events-none transition-transform duration-300 ease-out z-50"
       style={{
-        transform: `translate(${position.x-8}px, ${position.y-55}px)`,
+        transform: `translate(${position.x - 8}px, ${position.y - 55}px)`,
       }}
     />
   );

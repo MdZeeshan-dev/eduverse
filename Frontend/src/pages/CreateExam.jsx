@@ -34,12 +34,12 @@ const CreateExam = () => {
               [field]:
                 field === "options"
                   ? q.options.map((opt, j) =>
-                      j === value.index ? value.text : opt
+                      j === value.index ? value.text : opt,
                     )
                   : value,
             }
-          : q
-      )
+          : q,
+      ),
     );
   };
 
@@ -53,7 +53,6 @@ const CreateExam = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Map correct answer (a, b, c, d) to actual option text
       const updatedQuestions = questions.map((q) => ({
         ...q,
         correctAnswer: q.options[["a", "b", "c", "d"].indexOf(q.correctAnswer)],
@@ -62,7 +61,7 @@ const CreateExam = () => {
       const result = await dispatch(createExam(examData)).unwrap();
       if (result && result._id) {
         await dispatch(
-          addQuestions({ examId: result._id, questions: updatedQuestions })
+          addQuestions({ examId: result._id, questions: updatedQuestions }),
         );
         setAlert({
           type: "success",
@@ -80,12 +79,10 @@ const CreateExam = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-10 bg-white rounded-sm my-10 shadow-lg">
-      {/* Header Section */}
       <h2 className="text-3xl font-extrabold mb-8 text-left text-blue-700">
         Create Exam
       </h2>
 
-      {/* Alert Message */}
       {alert.message && (
         <div
           className={`p-4 mb-4 text-white rounded-lg ${
@@ -96,9 +93,7 @@ const CreateExam = () => {
         </div>
       )}
 
-      {/* Form Section */}
       <form onSubmit={handleSubmit} className="space-y-8">
-        {/* Exam Details */}
         <div className="grid grid-cols-2 gap-6">
           <div>
             <label className="block text-lg font-medium text-gray-700">
@@ -206,7 +201,6 @@ const CreateExam = () => {
           </div>
         </div>
 
-        {/* Exam Type Dropdown */}
         <div>
           <label className="block text-lg font-medium text-gray-700">
             Select Exam Type
@@ -222,7 +216,6 @@ const CreateExam = () => {
           </select>
         </div>
 
-        {/* Add Questions Section */}
         <h3 className="text-2xl font-bold text-gray-800 mt-8">Add Questions</h3>
 
         {questions.map((q, index) => (
@@ -267,7 +260,6 @@ const CreateExam = () => {
               ))}
             </div>
 
-            {/* Correct Answer Dropdown */}
             <label className="block text-lg font-medium text-gray-700 mt-4">
               Correct Answer
             </label>
@@ -287,7 +279,6 @@ const CreateExam = () => {
           </div>
         ))}
 
-        {/* Add Another Question Button */}
         <button
           type="button"
           onClick={addQuestionField}
@@ -296,7 +287,6 @@ const CreateExam = () => {
           Add Another Question
         </button>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-blue-600 text-white font-semibold px-4 py-3 rounded-lg hover:bg-blue-700 transition-all shadow-md"

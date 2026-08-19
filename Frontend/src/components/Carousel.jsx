@@ -12,11 +12,11 @@ const Carousel = () => {
 
   const totalSlides = images.length;
 
-  // Create a loop by adding first and last images as clones
+  
   const slides = [
-    images[totalSlides - 1], // Clone last image at the beginning
+    images[totalSlides - 1], 
     ...images,
-    images[0], // Clone first image at the end
+    images[0], 
   ];
 
   const prevSlide = () => {
@@ -29,7 +29,7 @@ const Carousel = () => {
     setCurrentIndex((prev) => prev + 1);
   };
 
-  // Handle infinite loop effect
+  
   useEffect(() => {
     if (currentIndex === 0) {
       setTimeout(() => {

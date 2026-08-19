@@ -16,7 +16,6 @@ const getAdminStats = async (req, res) => {
   }
 };
 
-// ✅ Ban User
 const banUser = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -34,12 +33,10 @@ const banUser = async (req, res) => {
   }
 };
 
-// ✅ Unban User
 const unbanUser = async (req, res) => {
   try {
     const { userId } = req.params;
 
-    // ✅ Check if userId is a valid MongoDB ObjectId
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(400).json({ message: "Invalid user ID format." });
     }
@@ -57,7 +54,9 @@ const unbanUser = async (req, res) => {
     res.status(200).json({ message: "User has been unbanned successfully" });
   } catch (error) {
     console.error("❌ Error unbanning user:", error);
-    res.status(500).json({ message: "Internal server error", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 };
 

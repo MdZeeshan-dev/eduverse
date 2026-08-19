@@ -4,27 +4,17 @@ const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 const courseRoutes = require("./routes/courseRoutes");
-const examRoutes = require('./routes/examRoutes');
-const connectDB = require("./config/db"); 
-const contactRoutes = require('./routes/contactRoutes');
-const adminRoutes = require("./routes/adminRoutes");  // Add this line
+const examRoutes = require("./routes/examRoutes");
+const connectDB = require("./config/db");
+const contactRoutes = require("./routes/contactRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
-
-
-dotenv.config(); 
+dotenv.config();
 
 const app = express();
 
-
-
-
-
-
-
-
-// Middleware
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static("public"));
 
 const allowedOrigins = [
@@ -44,23 +34,21 @@ app.use(
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  })
+  }),
 );
 
 app.options("*", cors());
 
 connectDB();
 
-// Routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/courses",courseRoutes);
-app.use('/api/exams', examRoutes);
-app.use('/api/contact', contactRoutes);
-// Add Admin Routes
+app.use("/api/courses", courseRoutes);
+app.use("/api/exams", examRoutes);
+app.use("/api/contact", contactRoutes);
+
 app.use("/api/admin", adminRoutes);
 
-// Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
