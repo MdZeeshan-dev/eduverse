@@ -134,8 +134,6 @@ const authSlice = createSlice({
         state.error = action.payload;
       });
   },
-
-  
 });
 
 export const { resetAuthState } = authSlice.actions;
