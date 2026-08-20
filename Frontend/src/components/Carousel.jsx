@@ -12,12 +12,7 @@ const Carousel = () => {
 
   const totalSlides = images.length;
 
-  
-  const slides = [
-    images[totalSlides - 1], 
-    ...images,
-    images[0], 
-  ];
+  const slides = [images[totalSlides - 1], ...images, images[0]];
 
   const prevSlide = () => {
     setIsTransitioning(true);
@@ -29,7 +24,6 @@ const Carousel = () => {
     setCurrentIndex((prev) => prev + 1);
   };
 
-  
   useEffect(() => {
     if (currentIndex === 0) {
       setTimeout(() => {
@@ -47,7 +41,6 @@ const Carousel = () => {
 
   return (
     <div className="w-fit h-100 my-2">
-
       <div className="overflow-hidden rounded-lg shadow-lg">
         <div
           className={`flex transition-transform ${
@@ -66,23 +59,20 @@ const Carousel = () => {
         </div>
       </div>
 
-
-
-<div className="relative -top-1/2  w-full flex justify-between px-4 transform">
-  <button
-    onClick={prevSlide}
-    className="bg-black/50 text-white p-2 rounded-full"
-  >
-    ❮
-  </button>
-  <button
-    onClick={nextSlide}
-    className="bg-black/50 text-white p-2 rounded-full"
-  >
-    ❯
-  </button>
-</div>
-
+      <div className="relative -top-1/2  w-full flex justify-between px-4 transform">
+        <button
+          onClick={prevSlide}
+          className="bg-black/50 text-white p-2 rounded-full"
+        >
+          ❮
+        </button>
+        <button
+          onClick={nextSlide}
+          className="bg-black/50 text-white p-2 rounded-full"
+        >
+          ❯
+        </button>
+      </div>
     </div>
   );
 };
