@@ -4,15 +4,24 @@ import React from "react";
 export default function CourseCategories() {
   const courses = {
     HTML: {
-      description: "Learn the fundamentals of HTML, the structure of web pages.",
+      description:
+        "Learn the fundamentals of HTML, the structure of web pages.",
       modules: [
         {
           name: "Introduction to HTML",
-          chapters: ["What is HTML?", "Basic Structure of an HTML Document", "HTML Tags & Elements"],
+          chapters: [
+            "What is HTML?",
+            "Basic Structure of an HTML Document",
+            "HTML Tags & Elements",
+          ],
         },
         {
           name: "HTML Forms & Multimedia",
-          chapters: ["Forms & Inputs", "Embedding Videos & Audio", "HTML Tables"],
+          chapters: [
+            "Forms & Inputs",
+            "Embedding Videos & Audio",
+            "HTML Tables",
+          ],
         },
         {
           name: "Semantic HTML & Best Practices",
@@ -21,7 +30,8 @@ export default function CourseCategories() {
       ],
     },
     CSS: {
-      description: "Master CSS to style web pages with layouts, animations, and responsiveness.",
+      description:
+        "Master CSS to style web pages with layouts, animations, and responsiveness.",
       modules: [
         {
           name: "CSS Basics",
@@ -38,15 +48,24 @@ export default function CourseCategories() {
       ],
     },
     JavaScript: {
-      description: "Understand JavaScript concepts, ES6+, and DOM manipulation.",
+      description:
+        "Understand JavaScript concepts, ES6+, and DOM manipulation.",
       modules: [
         {
           name: "JavaScript Fundamentals",
-          chapters: ["Variables & Data Types", "Functions & Scope", "Loops & Conditions"],
+          chapters: [
+            "Variables & Data Types",
+            "Functions & Scope",
+            "Loops & Conditions",
+          ],
         },
         {
           name: "DOM Manipulation",
-          chapters: ["Selecting Elements", "Event Listeners", "Creating & Removing Elements"],
+          chapters: [
+            "Selecting Elements",
+            "Event Listeners",
+            "Creating & Removing Elements",
+          ],
         },
         {
           name: "Asynchronous JavaScript",
@@ -59,7 +78,11 @@ export default function CourseCategories() {
       modules: [
         {
           name: "Introduction to React",
-          chapters: ["JSX & Components", "Props & State", "React Lifecycle Methods"],
+          chapters: [
+            "JSX & Components",
+            "Props & State",
+            "React Lifecycle Methods",
+          ],
         },
         {
           name: "Advanced React",
@@ -67,7 +90,11 @@ export default function CourseCategories() {
         },
         {
           name: "State Management",
-          chapters: ["Redux & Redux Toolkit", "Recoil & Zustand", "Global State Management"],
+          chapters: [
+            "Redux & Redux Toolkit",
+            "Recoil & Zustand",
+            "Global State Management",
+          ],
         },
       ],
     },
@@ -76,7 +103,11 @@ export default function CourseCategories() {
       modules: [
         {
           name: "Getting Started with Node.js",
-          chapters: ["What is Node.js?", "NPM & Modules", "Creating a Simple Server"],
+          chapters: [
+            "What is Node.js?",
+            "NPM & Modules",
+            "Creating a Simple Server",
+          ],
         },
         {
           name: "Building APIs with Express",
@@ -84,7 +115,11 @@ export default function CourseCategories() {
         },
         {
           name: "Databases & Authentication",
-          chapters: ["MongoDB & Mongoose", "User Authentication", "JWT & OAuth"],
+          chapters: [
+            "MongoDB & Mongoose",
+            "User Authentication",
+            "JWT & OAuth",
+          ],
         },
       ],
     },
@@ -93,7 +128,11 @@ export default function CourseCategories() {
       modules: [
         {
           name: "Vue.js Basics",
-          chapters: ["Vue Instance", "Directives & Bindings", "Methods & Events"],
+          chapters: [
+            "Vue Instance",
+            "Directives & Bindings",
+            "Methods & Events",
+          ],
         },
         {
           name: "Component-Based Development",
@@ -101,7 +140,11 @@ export default function CourseCategories() {
         },
         {
           name: "Vue State Management",
-          chapters: ["Vuex & Pinia", "Composition API", "Performance Optimization"],
+          chapters: [
+            "Vuex & Pinia",
+            "Composition API",
+            "Performance Optimization",
+          ],
         },
       ],
     },
@@ -111,8 +154,9 @@ export default function CourseCategories() {
 
   return (
     <div className="px-10 py-16">
-      
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Explore Our Courses</h2>
+      <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+        Explore Our Courses
+      </h2>
       <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-center">
         {Object.keys(courses).map((category, index) => (
           <div
@@ -125,20 +169,29 @@ export default function CourseCategories() {
         ))}
       </section>
 
-      
       {selectedCourse && (
         <div className="mt-10 p-6 bg-white rounded-xl shadow-lg border border-gray-200">
-          <h2 className="text-3xl font-semibold text-blue-600">{selectedCourse} Course</h2>
-          <p className="mt-3 text-lg text-gray-700">{courses[selectedCourse].description}</p>
+          <h2 className="text-3xl font-semibold text-blue-600">
+            {selectedCourse} Course
+          </h2>
+          <p className="mt-3 text-lg text-gray-700">
+            {courses[selectedCourse].description}
+          </p>
 
-      
           <div className="mt-6 space-y-6">
             {courses[selectedCourse].modules.map((module, index) => (
-              <div key={index} className="p-5 border rounded-lg bg-gray-50 hover:bg-gray-100 transition">
-                <h3 className="text-xl font-semibold text-gray-800">{module.name}</h3>
+              <div
+                key={index}
+                className="p-5 border rounded-lg bg-gray-50 hover:bg-gray-100 transition"
+              >
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {module.name}
+                </h3>
                 <ul className="list-disc ml-6 mt-3 text-gray-700">
                   {module.chapters.map((chapter, idx) => (
-                    <li key={idx} className="text-lg">{chapter}</li>
+                    <li key={idx} className="text-lg">
+                      {chapter}
+                    </li>
                   ))}
                 </ul>
               </div>
