@@ -60,6 +60,9 @@ const Carousel = () => {
       </div>
 
       <div className="relative -top-1/2  w-full flex justify-between px-4 transform">
+
+
+      
         <button
           onClick={prevSlide}
           className="bg-black/50 text-white p-2 rounded-full"
