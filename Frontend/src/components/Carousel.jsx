@@ -65,8 +65,6 @@ const Carousel = () => {
           className="bg-black/50 text-white p-2 rounded-full"
         >
           ❮
-
-          
         </button>
         <button
           onClick={nextSlide}
