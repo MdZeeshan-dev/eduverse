@@ -9,12 +9,6 @@ function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="flex flex-col items-center md:items-start">
           <Link to="/" className="logo">
-
-
-
-
-
-
             <img className="w-40" src={devdojo} alt="Logo" />
           </Link>
           <p className="text-sm mt-3 text-gray-400 text-center md:text-left">
