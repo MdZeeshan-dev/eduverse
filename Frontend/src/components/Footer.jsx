@@ -17,6 +17,9 @@ function Footer() {
 
 
 
+
+
+
             <img className="w-40" src={devdojo} alt="Logo" />
           </Link>
           <p className="text-sm mt-3 text-gray-400 text-center md:text-left">
