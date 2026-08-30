@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import devdojo from "../assets/DevDojo.png";
 
+
 function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300 py-10 px-6">
@@ -67,7 +68,7 @@ function Footer() {
 
 
 
-            
+
             <a href="#" className="hover:text-sky-400 transition duration-300">
               <FaTwitter size={28} />
             </a>
