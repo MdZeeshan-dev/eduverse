@@ -60,6 +60,14 @@ function Footer() {
             <a href="#" className="hover:text-blue-500 transition duration-300">
               <FaFacebook size={28} />
             </a>
+
+
+
+
+
+
+
+            
             <a href="#" className="hover:text-sky-400 transition duration-300">
               <FaTwitter size={28} />
             </a>
