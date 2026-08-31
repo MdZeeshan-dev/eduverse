@@ -7,10 +7,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-
-
-  
   background-color: #ffffff; /* Change as needed */
   z-index: 9999;
 }
