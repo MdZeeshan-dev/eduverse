@@ -12,13 +12,18 @@ const Carousel = () => {
 
   const totalSlides = images.length;
 
+
+
+
+  
+
   const slides = [images[totalSlides - 1], ...images, images[0]];
 
   const prevSlide = () => {
     setIsTransitioning(true);
     setCurrentIndex((prev) => prev - 1);
   };
-  
+
 
   const nextSlide = () => {
     setIsTransitioning(true);
