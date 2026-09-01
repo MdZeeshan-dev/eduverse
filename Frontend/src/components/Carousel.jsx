@@ -7,15 +7,10 @@ const images = [
 ];
 
 const Carousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(1); // Start from the first real image
+  const [currentIndex, setCurrentIndex] = useState(1); 
   const [isTransitioning, setIsTransitioning] = useState(true);
 
   const totalSlides = images.length;
-
-
-
-
-  
 
   const slides = [images[totalSlides - 1], ...images, images[0]];
 
@@ -23,7 +18,6 @@ const Carousel = () => {
     setIsTransitioning(true);
     setCurrentIndex((prev) => prev - 1);
   };
-
 
   const nextSlide = () => {
     setIsTransitioning(true);
