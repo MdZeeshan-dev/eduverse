@@ -18,6 +18,7 @@ const Carousel = () => {
     setIsTransitioning(true);
     setCurrentIndex((prev) => prev - 1);
   };
+  
 
   const nextSlide = () => {
     setIsTransitioning(true);
