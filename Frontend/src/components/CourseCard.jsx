@@ -9,10 +9,11 @@ function CourseCard({ image, category, heading, level, duration, link }) {
         {/* Course Image */}
         <div className="w-full overflow-hidden">
           <img
-          
+            src={image}
+            alt="Course"
+            className="w-[300px] h-[150px] object-cover transform group-hover:scale-105 transition-all"
+          />
         </div>
-
-
 
         <div className="mt-4 space-y-2 flex flex-col">
           <span className="text-sm font-semibold uppercase text-blue-500">
