@@ -22,13 +22,7 @@ function CourseCard({ image, category, heading, level, duration, link }) {
 
           <h2 className="text-lg font-bold text-gray-900 h-16">{heading}</h2>
 
-          <div className="flex items-center justify-between text-gray-600 text-sm justify-self-end">
-            <span className="flex items-center">🏅 {level}</span>
-            <span className="flex items-center">
-              <FaClock className="mr-1" />
-              Duration: {duration}hrs
-            </span>
-          </div>
+       
         </div>
       </div>
     </Link>
